@@ -29,28 +29,35 @@ try {
     await route.continue({ url: requested.origin + destination });
   });
   await page.goto(`${baseUrl}/index.html#all-games`);
-  const search = page.getByRole("searchbox", { name: "Search titles, genres, and tags" });
+  const search = page.getByRole("searchbox", { name: "Search games, genres, and tags" });
   await search.fill("Platform Wars");
-  const play = page.locator("#launch-platform-wars");
+  // Wait for debounced search to update state + filter the grid (card exists before search too).
+  await page.waitForFunction(() => document.querySelectorAll("#game-grid .game-card").length === 1);
+  const card = page.locator("#game-grid .game-card[data-slug='platform-wars']");
+  await card.waitFor();
+  const play = card.locator(".gcard-play");
   await play.click();
   await page.frameLocator("#game-frame").locator("#arena").waitFor({ state: "attached" });
   await page.getByRole("link", { name: "Back to game select" }).click();
-  await page.waitForFunction(() => document.activeElement?.id === "launch-platform-wars");
+  await page.waitForFunction(() => document.getElementById("catalog-search")?.value === "Platform Wars");
   assert.equal(await search.inputValue(), "Platform Wars");
+  await card.waitFor();
 
-  const card = page.locator(".game-card").filter({ has: play });
-  await card.locator(".game-capsule-link").click();
+  await card.locator(".gcard-cover-link").click();
   await page.frameLocator("#game-frame").locator("#arena").waitFor({ state: "attached" });
   await page.getByRole("link", { name: "Back to game select" }).click();
-  await page.waitForFunction(() => document.activeElement?.id === "launch-platform-wars");
+  await card.waitFor();
 
-  await card.getByRole("button", { name: "Favorite Platform Wars" }).click();
-  await page.getByLabel("Collection").selectOption("favorites");
-  assert.equal(await page.locator(".game-card").count(), 1);
-  await card.getByRole("link", { name: "Game details" }).click();
+  await card.getByRole("button", { name: /Add to favorites: Platform Wars/ }).click();
+  await page.getByRole("button", { name: /^Filters/ }).click();
+  await page.locator("#filter-collection").getByRole("button", { name: "Favorites", exact: true }).click();
+  await page.getByRole("button", { name: /Show \d+ results?/ }).click();
+  assert.equal(await page.locator("#game-grid .game-card").count(), 1);
+  await card.locator(".gcard-title a").click();
   await page.getByRole("heading", { name: "Platform Wars: Phone vs Desktop" }).waitFor();
 
-  await page.goto(`${baseUrl}/index.html#all-games`);
+  await page.goto(`${baseUrl}/index.html#settings`);
+  await page.locator("#settings details.fold").evaluate((details) => { details.open = true; });
   await page.locator("#save-file-input").setInputFiles({
     name: "backup.txt",
     mimeType: "text/plain",
