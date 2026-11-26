@@ -53,8 +53,11 @@
       <section class="stage-row" id="stageRow" aria-label="Stage Select"></section>
 
       <footer class="deploy-bar">
-        <div class="controls-help">
+        <div class="controls-help controls-help-kb">
           <strong>1P:</strong> WASD/Arrows Move · W/↑/Space Jump · J/Z Attack · K/X Special · L/Shift Shield · U Smash · <strong>2P:</strong> Arrows + Numpad 1/2/3 (or / . ,)
+        </div>
+        <div class="controls-help controls-help-touch" hidden>
+          <strong>Touch:</strong> Left stick move (flick up to jump) · ATK · SPEC · JUMP · SHLD · hold SMASH · Pause in the top bar
         </div>
         <button type="button" id="deployBtn" class="deploy-btn">💥 MASH! START BRAWL</button>
       </footer>
@@ -75,14 +78,14 @@
       <canvas id="arenaCanvas" width="960" height="540"></canvas>
       <div class="fighter-cards" id="fighterCards"></div>
 
-      <div id="touchControls" aria-label="Touch Controls">
+      <div id="touchControls" aria-label="Touch Controls" hidden>
         <div class="touch-stick-zone" id="touchStickZone"><div class="touch-stick-knob" id="touchStickKnob"></div></div>
-        <div class="touch-buttons">
-          <button type="button" data-tact="attack">ATK</button>
-          <button type="button" data-tact="special">SPEC</button>
-          <button type="button" data-tact="jump">JUMP</button>
-          <button type="button" data-tact="shield">SHLD</button>
-          <button type="button" data-tact="smash" aria-label="Charge smash">SMASH</button>
+        <div class="touch-buttons" role="group" aria-label="Action buttons">
+          <button type="button" class="tact-jump" data-tact="jump">JUMP</button>
+          <button type="button" class="tact-special" data-tact="special">SPEC</button>
+          <button type="button" class="tact-attack" data-tact="attack">ATK</button>
+          <button type="button" class="tact-shield" data-tact="shield">SHLD</button>
+          <button type="button" class="tact-smash" data-tact="smash" aria-label="Charge smash">SMASH</button>
         </div>
       </div>
 

@@ -46,7 +46,8 @@
         "Fighting",
         "Platformer",
         "Multiplayer",
-        "Offline-friendly"
+        "Offline-friendly",
+        "Mobile"
       ],
       "emoji": "💥",
       "status": "preview",
@@ -57,7 +58,7 @@
         "keyboard",
         "gamepad"
       ],
-      "controls": "1P: WASD/Arrows move, W/Up/Space jump, J/Z attack, K/X special, L/C/Shift shield/dodge, U/V smash, P/Esc pause. 2P: P1 WASD + F/G/H/R, P2 Arrows + Numpad 1/2/3/0. Touch pad & native P1/P2 gamepads supported.",
+      "controls": "1P: WASD/Arrows move, W/Up/Space jump, J/Z attack, K/X special, L/C/Shift shield/dodge, U/V smash, P/Esc pause. 2P: P1 WASD + F/G/H/R, P2 Arrows + Numpad 1/2/3/0. Touch: left stick move (up=jump), JUMP/ATK/SPEC/SHLD/SMASH buttons; landscape preferred. Native P1/P2 gamepads supported.",
       "modes": [
         "solo",
         "multiplayer"

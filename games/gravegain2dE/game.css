@@ -6,17 +6,25 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
+  height: 100dvh;
   overflow: hidden;
   background: #080614;
   color: #f1f5f9;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body.is-touch-play #gameScreen {
+  touch-action: none;
 }
 
 #appShell {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -312,8 +320,11 @@ html, body {
   font-size: 0.72rem;
   color: #94a3b8;
 }
+.controls-help-touch[hidden],
+.controls-help-kb[hidden] { display: none !important; }
 .deploy-btn {
   min-height: 46px;
+  min-width: 44px;
   padding: 10px 28px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -323,6 +334,7 @@ html, body {
   font-size: 1rem;
   letter-spacing: 0.04em;
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  touch-action: manipulation;
 }
 
 /* --- Active Match Screen --- */
@@ -374,9 +386,11 @@ html, body {
 }
 
 #arenaCanvas {
-  width: min(100vw, calc(100vh * (16 / 9)));
-  height: min(100vh, calc(100vw / (16 / 9)));
+  width: min(100vw, calc(100dvh * (16 / 9)));
+  height: min(100dvh, calc(100vw / (16 / 9)));
+  max-width: 100%;
   display: block;
+  touch-action: none;
 }
 
 .fighter-cards {
@@ -408,57 +422,87 @@ html, body {
 .f-stocks { margin-left: auto; color: var(--fcol); letter-spacing: 1px; }
 .f-pct { font-size: 1.45rem; font-weight: 900; line-height: 1.05; text-align: right; }
 
-/* --- Touch Controls (visible on coarse pointers) --- */
+/* --- Touch Controls (shown via .is-touch-ui on #gameScreen) --- */
 #touchControls {
   position: absolute;
-  inset: auto 0 max(10px, env(safe-area-inset-bottom)) 0;
+  inset: auto 0 0 0;
   z-index: 5;
   display: none;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 max(12px, env(safe-area-inset-left)) 0 max(12px, env(safe-area-inset-right));
+  gap: 12px;
+  padding:
+    0
+    max(10px, env(safe-area-inset-right))
+    max(8px, env(safe-area-inset-bottom))
+    max(10px, env(safe-area-inset-left));
   pointer-events: none;
+  box-sizing: border-box;
 }
-@media (pointer: coarse) {
-  #touchControls { display: flex; }
-  .fighter-cards { bottom: 132px; }
+#gameScreen.is-touch-ui #touchControls {
+  display: flex;
 }
+#touchControls[hidden] { display: none !important; }
+
 .touch-stick-zone {
-  width: 112px;
-  height: 112px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(141, 240, 207, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(141, 240, 207, 0.5);
   display: grid;
   place-items: center;
   touch-action: none;
   pointer-events: auto;
+  flex-shrink: 0;
 }
 .touch-stick-knob {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #8df0cf, #0f766e);
   border: 2px solid #ffffff;
+  will-change: transform;
 }
 .touch-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 54px);
+  grid-template-columns: 64px 64px;
+  grid-template-rows: 56px 56px 56px;
   gap: 8px;
   pointer-events: auto;
+  align-content: end;
 }
 .touch-buttons button {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
+  width: 64px;
+  height: 56px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 18px;
   border: 2px solid rgba(255, 255, 255, 0.45);
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.88);
   color: #f8fafc;
   font-size: 0.72rem;
   font-weight: 900;
-  touch-action: manipulation;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
-.touch-buttons button:active { transform: scale(0.92); background: #1e293b; }
+.touch-buttons button:active,
+.touch-buttons button.is-held {
+  transform: scale(0.94);
+  background: #1e293b;
+  border-color: #8df0cf;
+}
+.touch-buttons .tact-jump {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: 100%;
+  background: rgba(16, 185, 129, 0.35);
+}
+.tact-special { grid-column: 1; grid-row: 2; }
+.tact-attack { grid-column: 2; grid-row: 2; background: rgba(251, 113, 133, 0.32); }
+.tact-shield { grid-column: 1; grid-row: 3; }
+.tact-smash { grid-column: 2; grid-row: 3; background: rgba(253, 224, 71, 0.28); color: #fde047; }
 
 /* --- Modals --- */
 .modal-overlay {
@@ -510,12 +554,81 @@ html, body {
 
 /* --- Responsive Mobile / Tablet Breakpoints --- */
 @media (max-width: 820px) {
-  .gg-header { padding-left: 0; padding-top: 34px; }
+  .gg-header { padding-left: 0; padding-top: max(34px, env(safe-area-inset-top)); }
   .select-layout { grid-template-columns: 1fr; }
   .slots-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stage-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .top-hud { left: 48px; }
+  .top-hud { left: max(48px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); }
   .f-hud { min-width: 78px; padding: 4px 6px; }
   .f-pct { font-size: 1.05rem; }
   .f-name { display: none; }
+  .mode-tab { min-height: 44px; }
+  .char-cell { min-height: 64px; }
+  .deploy-bar { flex-direction: column; align-items: stretch; }
+  .deploy-btn { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .roster-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+  .char-cell { min-height: 58px; padding: 5px 2px; }
+  .char-cell strong { font-size: 0.68rem; }
+  .char-cell small { font-size: 0.58rem; }
+  .rules-bar { margin-left: 0; width: 100%; }
+  .stage-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* Portrait touch: zoomed playfield + dedicated control strip */
+@media (orientation: portrait) {
+  #gameScreen.is-touch-ui {
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-top: max(48px, calc(8px + env(safe-area-inset-top)));
+    padding-bottom: calc(168px + env(safe-area-inset-bottom));
+  }
+  #gameScreen.is-touch-ui #arenaCanvas {
+    /* Prefer readable fighters over full stage width on narrow phones */
+    height: min(58dvh, calc(100dvh - 230px));
+    width: calc(min(58dvh, calc(100dvh - 230px)) * 16 / 9);
+    max-width: none;
+    margin: 4px auto 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #gameScreen.is-touch-ui .fighter-cards {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: 8px auto 0;
+    z-index: 4;
+  }
+  #gameScreen.is-touch-ui #touchControls {
+    min-height: 152px;
+    background: linear-gradient(180deg, transparent, rgba(4, 3, 10, 0.9) 16%);
+  }
+}
+
+/* Landscape touch: corner overlays, keep playfield tall */
+@media (orientation: landscape) {
+  #gameScreen.is-touch-ui .fighter-cards {
+    bottom: auto;
+    top: max(44px, calc(8px + env(safe-area-inset-top)));
+  }
+  #gameScreen.is-touch-ui #touchControls {
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+  #gameScreen.is-touch-ui .touch-stick-zone {
+    width: 108px;
+    height: 108px;
+  }
+  #gameScreen.is-touch-ui .touch-buttons {
+    grid-template-columns: 56px 56px;
+    grid-template-rows: 48px 48px 48px;
+    gap: 6px;
+  }
+  #gameScreen.is-touch-ui .touch-buttons button {
+    width: 56px;
+    height: 48px;
+  }
 }

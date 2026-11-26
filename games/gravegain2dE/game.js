@@ -68,7 +68,38 @@
   const keysDown = new Set();
   const touchState = { x: 0, y: 0, jump: false, attack: false, special: false, shield: false, smash: false };
 
-  window.gameState = { title: 'gravegain2dE', get active() { return running; } };
+  function isTouchUiPreferred() {
+    try {
+      if (window.matchMedia('(pointer: coarse)').matches) return true;
+      if (window.matchMedia('(hover: none) and (pointer: fine)').matches && (navigator.maxTouchPoints || 0) > 0) return true;
+      if (('ontouchstart' in window) || (navigator.maxTouchPoints || 0) > 0) {
+        return Math.min(window.innerWidth, window.innerHeight) <= 920;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  function syncTouchChrome() {
+    const touchOn = isTouchUiPreferred();
+    document.body.classList.toggle('is-touch-play', touchOn && running);
+    gameEl?.classList.toggle('is-touch-ui', touchOn);
+    const touchRoot = $('#touchControls');
+    if (touchRoot) touchRoot.hidden = !touchOn;
+    const kbHelp = document.querySelector('.controls-help-kb');
+    const touchHelp = document.querySelector('.controls-help-touch');
+    if (kbHelp) kbHelp.hidden = touchOn;
+    if (touchHelp) touchHelp.hidden = !touchOn;
+  }
+
+  window.gameState = {
+    title: 'gravegain2dE',
+    get active() { return running; },
+    getTouchState() { return { ...touchState }; },
+    getP1Pose() {
+      const f = match?.fighters?.find((x) => x.playerNum === 1 && !x.isCpu);
+      return f ? { x: f.x, y: f.y, vy: f.vy, onGround: !!f.onGround } : null;
+    }
+  };
   window.game = window.gameState;
 
   // --- DOM Refs ---
@@ -364,12 +395,13 @@
     const hasP2Human = match.fighters.some((f) => !f.isCpu && f.playerNum === 2);
     const out = {};
 
-    // P1
+    // P1 — touch stick + buttons merge with keyboard/gamepad (stick-up jumps like ArrowUp)
     const gp1 = readGamepad(1);
+    const stickJump = touchState.y < -0.45;
     const p1 = {
       x: touchState.x,
       y: touchState.y,
-      jump: touchState.jump,
+      jump: touchState.jump || stickJump,
       attack: touchState.attack,
       special: touchState.special,
       shield: touchState.shield,
@@ -502,6 +534,7 @@
     gameEl.hidden = false;
     resultsEl.hidden = true;
     pauseEl.hidden = true;
+    syncTouchChrome();
     fitCanvas();
     buildFighterHud();
     lastTs = performance.now();
@@ -712,10 +745,14 @@
     paused = false;
     cancelAnimationFrame(rafId);
     keysDown.clear();
+    touchState.x = 0;
+    touchState.y = 0;
+    touchState.jump = touchState.attack = touchState.special = touchState.shield = touchState.smash = false;
     gameEl.hidden = true;
     resultsEl.hidden = true;
     pauseEl.hidden = true;
     menuEl.hidden = false;
+    syncTouchChrome();
     renderRosterGrid();
     renderInspector();
     requestAnimationFrame(renderPreviewLoop);
@@ -738,7 +775,15 @@
     }
     arenaCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-  window.addEventListener('resize', fitCanvas);
+  function onViewportChange() {
+    syncTouchChrome();
+    fitCanvas();
+  }
+  window.addEventListener('resize', onViewportChange);
+  window.addEventListener('orientationchange', onViewportChange);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', onViewportChange);
+  }
 
   // --- Keyboard & Touch Listeners ---
   window.addEventListener('keydown', (e) => {
@@ -777,13 +822,17 @@
   }
   if (stickZone) {
     stickZone.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
       Audio.unlock();
       stickPtr = e.pointerId;
-      stickZone.setPointerCapture(e.pointerId);
+      try { stickZone.setPointerCapture(e.pointerId); } catch (_) {}
       updateStick(e);
     });
     stickZone.addEventListener('pointermove', (e) => {
-      if (e.pointerId === stickPtr) updateStick(e);
+      if (e.pointerId === stickPtr) {
+        e.preventDefault();
+        updateStick(e);
+      }
     });
     const resetStick = (e) => {
       if (e.pointerId !== stickPtr) return;
@@ -800,13 +849,19 @@
     const act = btn.dataset.tact;
     btn.addEventListener('pointerdown', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       Audio.unlock();
       touchState[act] = true;
+      btn.classList.add('is-held');
+      try { btn.setPointerCapture(e.pointerId); } catch (_) {}
     });
-    const rel = () => { touchState[act] = false; };
+    const rel = () => {
+      touchState[act] = false;
+      btn.classList.remove('is-held');
+    };
     btn.addEventListener('pointerup', rel);
     btn.addEventListener('pointercancel', rel);
-    btn.addEventListener('pointerleave', rel);
+    btn.addEventListener('lostpointercapture', rel);
   });
 
   // --- Wire Menu Controls ---
@@ -859,5 +914,7 @@
   renderStageRow();
   renderInspector();
   refreshCareerSummary();
+  syncTouchChrome();
+  fitCanvas();
   requestAnimationFrame(renderPreviewLoop);
 })();

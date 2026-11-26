@@ -3,7 +3,7 @@
   "slug": "gravegain2dE",
   "description": "A MoonRock platform arena brawler featuring 16 pickable heroes across all four GraveGain races and classes, five battlegrounds, directional specials, Ley Core ultimates, Arcade Gauntlet, and 2-4 player brawls.",
   "genre": "Action",
-  "tags": ["Action", "Fighting", "Platformer", "Multiplayer", "Offline-friendly"],
+  "tags": ["Action", "Fighting", "Platformer", "Multiplayer", "Offline-friendly", "Mobile"],
   "emoji": "💥",
   "entrypoint": "index.html",
   "guideEntrypoint": "guide.html",
