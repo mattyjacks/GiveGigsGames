@@ -45,6 +45,10 @@ for (const game of catalog.games) {
       game.modes.some((mode) => !["solo", "multiplayer"].includes(mode)))) {
     fail("List supported modes from solo and multiplayer.");
   }
+  if (game.mobilePriority !== undefined &&
+      (typeof game.mobilePriority !== "number" || !Number.isFinite(game.mobilePriority))) {
+    fail("Set mobilePriority to a finite number when present.");
+  }
   if (game.runtimeType === "static") {
     if (!/^(?:[\w-]+\/)+[\w-]+\.html$/.test(game.entrypoint || "")) fail("Use a relative HTML entrypoint inside games/.");
     const file = await stat(new URL(game.entrypoint, catalogUrl)).catch(() => null);
