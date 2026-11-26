@@ -15,7 +15,9 @@
   "maker": {
     "name": "Joseph Ombati",
     "bio": "Creator and Game Director of Semester Survival.",
-    "url": "https://github.com/Josephy1714/GiveGigsGames"
+    "url": "https://givegigs.com/user/cmwe3dxi20000ij08jbhqk8hx",
+    "urlLabel": "GiveGigsGames Worker Profile",
+    "email": "ombatijoseph640@gmail.com"
   },
   "controls": {
     "keyboard": {
@@ -47,6 +49,13 @@
     "license": "Private - All Rights Reserved"
   },
   "credits": [
+    {
+      "name": "Joseph Ombati",
+      "role": "Creator & Game Director",
+      "url": "https://givegigs.com/user/cmwe3dxi20000ij08jbhqk8hx",
+      "urlLabel": "GiveGigsGames Worker Profile",
+      "email": "ombatijoseph640@gmail.com"
+    },
     {
       "name": "Three.js",
       "source": "Three.js",
