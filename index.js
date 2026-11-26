@@ -506,9 +506,18 @@
     return sortGames(list);
   }
 
+  // Match site.css phone layout (< 768px). Desktop keeps the existing featured order.
+  const mobileCatalogQuery = window.matchMedia("(max-width: 767px)");
+  const isMobileCatalog = () => mobileCatalogQuery.matches;
+
   function sortGames(list) {
     const mode = state.sort;
+    const preferMobile = isMobileCatalog() && mode === "featured";
     return list.sort((a, b) => {
+      if (preferMobile) {
+        const mobileRank = Number(b.mobilePriority || 0) - Number(a.mobilePriority || 0);
+        if (mobileRank) return mobileRank;
+      }
       if (mode === "featured") {
         return Number(Boolean(b.featured)) - Number(Boolean(a.featured)) ||
           Number(Boolean(b.recommended)) - Number(Boolean(a.recommended)) ||
@@ -798,6 +807,16 @@
     state.sort = sort.value;
     renderGrid();
   });
+
+  const onMobileCatalogChange = () => {
+    if (!loaded || state.sort !== "featured" || state.query.trim()) return;
+    renderGrid();
+  };
+  if (typeof mobileCatalogQuery.addEventListener === "function") {
+    mobileCatalogQuery.addEventListener("change", onMobileCatalogChange);
+  } else if (typeof mobileCatalogQuery.addListener === "function") {
+    mobileCatalogQuery.addListener(onMobileCatalogChange);
+  }
 
   let searchTimer = null;
   search.addEventListener("input", () => {

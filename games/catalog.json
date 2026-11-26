@@ -33,7 +33,8 @@
         "games/images/screenshots/gravegain2dD-1.jpg",
         "games/images/screenshots/gravegain2dD-2.jpg",
         "games/images/screenshots/gravegain2dD-3.jpg"
-      ]
+      ],
+      "mobilePriority": 100
     },
     {
       "slug": "gravegain2dE",
@@ -124,7 +125,8 @@
         "games/images/screenshots/platform-wars-1.jpg",
         "games/images/screenshots/platform-wars-2.jpg",
         "games/images/screenshots/platform-wars-3.jpg"
-      ]
+      ],
+      "mobilePriority": 100
     },
     {
       "slug": "lastwordszombies",
@@ -189,7 +191,8 @@
         "games/images/screenshots/venturemechanically-1.jpg",
         "games/images/screenshots/venturemechanically-2.jpg",
         "games/images/screenshots/venturemechanically-3.jpg"
-      ]
+      ],
+      "mobilePriority": 76
     },
     {
       "slug": "financialfreedom",
@@ -221,7 +224,8 @@
         "games/images/screenshots/financialfreedom-1.jpg",
         "games/images/screenshots/financialfreedom-2.jpg",
         "games/images/screenshots/financialfreedom-3.jpg"
-      ]
+      ],
+      "mobilePriority": 74
     },
     {
       "slug": "serversavershield",
@@ -252,7 +256,8 @@
         "games/images/screenshots/serversavershield-1.jpg",
         "games/images/screenshots/serversavershield-2.jpg",
         "games/images/screenshots/serversavershield-3.jpg"
-      ]
+      ],
+      "mobilePriority": 90
     },
     {
       "slug": "overtake",
@@ -284,7 +289,8 @@
         "games/images/screenshots/overtake-1.jpg",
         "games/images/screenshots/overtake-2.jpg",
         "games/images/screenshots/overtake-3.jpg"
-      ]
+      ],
+      "mobilePriority": 88
     },
     {
       "slug": "assassinanimals",
@@ -343,7 +349,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "battlesharks/guide.html"
+      "guideEntrypoint": "battlesharks/guide.html",
+      "mobilePriority": 48
     },
     {
       "slug": "battlesharks2",
@@ -374,7 +381,8 @@
         "games/images/screenshots/battlesharks2-1.jpg",
         "games/images/screenshots/battlesharks2-2.jpg",
         "games/images/screenshots/battlesharks2-3.jpg"
-      ]
+      ],
+      "mobilePriority": 48
     },
     {
       "slug": "gravegain2dA",
@@ -406,7 +414,8 @@
         "games/images/screenshots/gravegain2dA-1.jpg",
         "games/images/screenshots/gravegain2dA-2.jpg",
         "games/images/screenshots/gravegain2dA-3.jpg"
-      ]
+      ],
+      "mobilePriority": 55
     },
     {
       "slug": "gravegain2dC",
@@ -441,7 +450,8 @@
         "games/images/screenshots/gravegain2dC-1.jpg",
         "games/images/screenshots/gravegain2dC-2.jpg",
         "games/images/screenshots/gravegain2dC-3.jpg"
-      ]
+      ],
+      "mobilePriority": 55
     },
     {
       "slug": "gravegain2dB",
@@ -473,7 +483,8 @@
         "games/images/screenshots/gravegain2dB-1.jpg",
         "games/images/screenshots/gravegain2dB-2.jpg",
         "games/images/screenshots/gravegain2dB-3.jpg"
-      ]
+      ],
+      "mobilePriority": 55
     },
     {
       "slug": "gravegain3dA",
@@ -538,7 +549,8 @@
         "games/images/screenshots/gravegain1dA-1.jpg",
         "games/images/screenshots/gravegain1dA-2.jpg",
         "games/images/screenshots/gravegain1dA-3.jpg"
-      ]
+      ],
+      "mobilePriority": 60
     },
     {
       "slug": "demolichdom",
@@ -569,7 +581,8 @@
         "games/images/screenshots/demolichdom-1.jpg",
         "games/images/screenshots/demolichdom-2.jpg",
         "games/images/screenshots/demolichdom-3.jpg"
-      ]
+      ],
+      "mobilePriority": 45
     },
     {
       "slug": "fridgesimulator",
@@ -599,7 +612,8 @@
         "games/images/screenshots/fridgesimulator-1.jpg",
         "games/images/screenshots/fridgesimulator-2.jpg",
         "games/images/screenshots/fridgesimulator-3.jpg"
-      ]
+      ],
+      "mobilePriority": 74
     },
     {
       "slug": "discoveramerica",
@@ -629,7 +643,8 @@
         "games/images/screenshots/discoveramerica-1.jpg",
         "games/images/screenshots/discoveramerica-2.jpg",
         "games/images/screenshots/discoveramerica-3.jpg"
-      ]
+      ],
+      "mobilePriority": 76
     },
     {
       "slug": "orbitaldrift",
@@ -660,7 +675,8 @@
         "games/images/screenshots/orbitaldrift-1.jpg",
         "games/images/screenshots/orbitaldrift-2.jpg",
         "games/images/screenshots/orbitaldrift-3.jpg"
-      ]
+      ],
+      "mobilePriority": 86
     },
     {
       "slug": "aiwhackamole",
@@ -691,7 +707,8 @@
         "games/images/screenshots/aiwhackamole-1.jpg",
         "games/images/screenshots/aiwhackamole-2.jpg",
         "games/images/screenshots/aiwhackamole-3.jpg"
-      ]
+      ],
+      "mobilePriority": 72
     },
     {
       "slug": "soundpainter2",
@@ -722,7 +739,8 @@
         "games/images/screenshots/soundpainter2-1.jpg",
         "games/images/screenshots/soundpainter2-2.jpg",
         "games/images/screenshots/soundpainter2-3.jpg"
-      ]
+      ],
+      "mobilePriority": 70
     },
     {
       "slug": "soundpainter",
@@ -753,7 +771,8 @@
         "games/images/screenshots/soundpainter-1.jpg",
         "games/images/screenshots/soundpainter-2.jpg",
         "games/images/screenshots/soundpainter-3.jpg"
-      ]
+      ],
+      "mobilePriority": 70
     },
     {
       "slug": "friendslop",
@@ -785,7 +804,8 @@
         "games/images/screenshots/friendslop-1.jpg",
         "games/images/screenshots/friendslop-2.jpg",
         "games/images/screenshots/friendslop-3.jpg"
-      ]
+      ],
+      "mobilePriority": 78
     },
     {
       "slug": "semester-survival",
@@ -819,7 +839,8 @@
         "games/images/screenshots/semester-survival-1.jpg",
         "games/images/screenshots/semester-survival-2.jpg",
         "games/images/screenshots/semester-survival-3.jpg"
-      ]
+      ],
+      "mobilePriority": 52
     },
     {
       "slug": "gravegain5dA",
@@ -924,7 +945,8 @@
         "games/images/screenshots/starship-simulator-1.jpg",
         "games/images/screenshots/starship-simulator-2.jpg",
         "games/images/screenshots/starship-simulator-3.jpg"
-      ]
+      ],
+      "mobilePriority": 82
     },
     {
       "slug": "neonbreaker",
@@ -954,7 +976,8 @@
         "games/images/screenshots/neonbreaker-1.jpg",
         "games/images/screenshots/neonbreaker-2.jpg",
         "games/images/screenshots/neonbreaker-3.jpg"
-      ]
+      ],
+      "mobilePriority": 84
     },
     {
       "slug": "neoninvaders",
@@ -984,7 +1007,8 @@
         "games/images/screenshots/neoninvaders-1.jpg",
         "games/images/screenshots/neoninvaders-2.jpg",
         "games/images/screenshots/neoninvaders-3.jpg"
-      ]
+      ],
+      "mobilePriority": 84
     },
     {
       "slug": "neonracer",
@@ -1014,7 +1038,8 @@
         "games/images/screenshots/neonracer-1.jpg",
         "games/images/screenshots/neonracer-2.jpg",
         "games/images/screenshots/neonracer-3.jpg"
-      ]
+      ],
+      "mobilePriority": 84
     },
     {
       "slug": "neonsnake",
@@ -1044,7 +1069,8 @@
         "games/images/screenshots/neonsnake-1.jpg",
         "games/images/screenshots/neonsnake-2.jpg",
         "games/images/screenshots/neonsnake-3.jpg"
-      ]
+      ],
+      "mobilePriority": 84
     },
     {
       "slug": "neonvoidrunner",
@@ -1074,7 +1100,8 @@
         "games/images/screenshots/neonvoidrunner-1.jpg",
         "games/images/screenshots/neonvoidrunner-2.jpg",
         "games/images/screenshots/neonvoidrunner-3.jpg"
-      ]
+      ],
+      "mobilePriority": 84
     },
     {
       "slug": "temple-of-lost-revenue",
@@ -1104,7 +1131,8 @@
         "games/images/screenshots/temple-of-lost-revenue-1.jpg",
         "games/images/screenshots/temple-of-lost-revenue-2.jpg",
         "games/images/screenshots/temple-of-lost-revenue-3.jpg"
-      ]
+      ],
+      "mobilePriority": 50
     },
     {
       "slug": "the-ai-expedition",
@@ -1134,7 +1162,8 @@
         "games/images/screenshots/the-ai-expedition-1.jpg",
         "games/images/screenshots/the-ai-expedition-2.jpg",
         "games/images/screenshots/the-ai-expedition-3.jpg"
-      ]
+      ],
+      "mobilePriority": 68
     },
     {
       "slug": "the-cave-of-bottlenecks",
@@ -1164,7 +1193,8 @@
         "games/images/screenshots/the-cave-of-bottlenecks-1.jpg",
         "games/images/screenshots/the-cave-of-bottlenecks-2.jpg",
         "games/images/screenshots/the-cave-of-bottlenecks-3.jpg"
-      ]
+      ],
+      "mobilePriority": 42
     },
     {
       "slug": "the-lost-city-of-customers",
@@ -1194,7 +1224,8 @@
         "games/images/screenshots/the-lost-city-of-customers-1.jpg",
         "games/images/screenshots/the-lost-city-of-customers-2.jpg",
         "games/images/screenshots/the-lost-city-of-customers-3.jpg"
-      ]
+      ],
+      "mobilePriority": 68
     },
     {
       "slug": "the-madi-ai-universe",
@@ -1224,7 +1255,8 @@
         "games/images/screenshots/the-madi-ai-universe-1.jpg",
         "games/images/screenshots/the-madi-ai-universe-2.jpg",
         "games/images/screenshots/the-madi-ai-universe-3.jpg"
-      ]
+      ],
+      "mobilePriority": 68
     },
     {
       "slug": "the-pipeline-mountain",
@@ -1254,7 +1286,8 @@
         "games/images/screenshots/the-pipeline-mountain-1.jpg",
         "games/images/screenshots/the-pipeline-mountain-2.jpg",
         "games/images/screenshots/the-pipeline-mountain-3.jpg"
-      ]
+      ],
+      "mobilePriority": 42
     },
     {
       "slug": "the-revenue-dragon",
@@ -1284,7 +1317,8 @@
         "games/images/screenshots/the-revenue-dragon-1.jpg",
         "games/images/screenshots/the-revenue-dragon-2.jpg",
         "games/images/screenshots/the-revenue-dragon-3.jpg"
-      ]
+      ],
+      "mobilePriority": 40
     },
     {
       "slug": "the-revenue-jungle",
@@ -1314,7 +1348,8 @@
         "games/images/screenshots/the-revenue-jungle-1.jpg",
         "games/images/screenshots/the-revenue-jungle-2.jpg",
         "games/images/screenshots/the-revenue-jungle-3.jpg"
-      ]
+      ],
+      "mobilePriority": 40
     },
     {
       "slug": "the-speed-portal",
@@ -1344,7 +1379,8 @@
         "games/images/screenshots/the-speed-portal-1.jpg",
         "games/images/screenshots/the-speed-portal-2.jpg",
         "games/images/screenshots/the-speed-portal-3.jpg"
-      ]
+      ],
+      "mobilePriority": 50
     },
     {
       "slug": "treasure-hunters",
@@ -1374,7 +1410,8 @@
         "games/images/screenshots/treasure-hunters-1.jpg",
         "games/images/screenshots/treasure-hunters-2.jpg",
         "games/images/screenshots/treasure-hunters-3.jpg"
-      ]
+      ],
+      "mobilePriority": 40
     },
     {
       "slug": "global-fashion-model-life",
@@ -1398,7 +1435,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "global-fashion-model-life/guide.html"
+      "guideEntrypoint": "global-fashion-model-life/guide.html",
+      "mobilePriority": 80
     },
     {
       "slug": "gravegain1d",
@@ -1423,7 +1461,8 @@
         "solo",
         "multiplayer"
       ],
-      "guideEntrypoint": "gravegain1d/guide.html"
+      "guideEntrypoint": "gravegain1d/guide.html",
+      "mobilePriority": 58
     },
     {
       "slug": "gravegain1dB",
@@ -1447,7 +1486,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "gravegain1dB/guide.html"
+      "guideEntrypoint": "gravegain1dB/guide.html",
+      "mobilePriority": 58
     },
     {
       "slug": "gravegain2d",
@@ -1656,7 +1696,8 @@
         "solo"
       ],
       "runtimeType": "static",
-      "guideEntrypoint": "semester-survival-runner/guide.html"
+      "guideEntrypoint": "semester-survival-runner/guide.html",
+      "mobilePriority": 95
     },
     {
       "slug": "country-generalizer",
