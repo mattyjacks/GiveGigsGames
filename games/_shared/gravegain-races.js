@@ -224,7 +224,7 @@
           leftLeg: leftLeg.leg, leftShin: leftLeg.shin, leftFoot: leftLeg.foot,
           rightLeg: rightLeg.leg, rightShin: rightLeg.shin, rightFoot: rightLeg.foot
         };
-        loadouts.set(root, { right: right.hand, left: left.hand, original: [gun] });
+        loadouts.set(root, { right: right.hand, left: left.hand, chest, head, pelvis, original: [gun] });
         root.userData.animations = K.RACE_ANIMATIONS;
         root.userData.animate = K.createHumanoidAnimator(parts, {
           race: 'human',
@@ -377,7 +377,7 @@
           leftLeg: leftLeg.leg, leftShin: leftLeg.shin, leftFoot: leftLeg.foot,
           rightLeg: rightLeg.leg, rightShin: rightLeg.shin, rightFoot: rightLeg.foot
         };
-        loadouts.set(root, { right: right.hand, left: left.hand, original: [staff] });
+        loadouts.set(root, { right: right.hand, left: left.hand, chest, head, pelvis, original: [staff] });
         root.userData.animations = K.RACE_ANIMATIONS;
         root.userData.animate = K.createHumanoidAnimator(parts, {
           race: 'elf',
@@ -527,7 +527,7 @@
           leftLeg: leftLeg.leg, leftShin: leftLeg.shin, leftFoot: leftLeg.foot,
           rightLeg: rightLeg.leg, rightShin: rightLeg.shin, rightFoot: rightLeg.foot
         };
-        loadouts.set(root, { right: right.hand, left: left.hand, original: [hammer, shield] });
+        loadouts.set(root, { right: right.hand, left: left.hand, chest, head, pelvis, original: [hammer, shield] });
         root.userData.animations = K.RACE_ANIMATIONS;
         root.userData.animate = K.createHumanoidAnimator(parts, {
           race: 'dwarf',
@@ -668,7 +668,7 @@
           leftLeg: leftLeg.leg, leftShin: leftLeg.shin, leftFoot: leftLeg.foot,
           rightLeg: rightLeg.leg, rightShin: rightLeg.shin, rightFoot: rightLeg.foot
         };
-        loadouts.set(root, { right: right.hand, left: left.hand, original: [cleaver] });
+        loadouts.set(root, { right: right.hand, left: left.hand, chest, head, pelvis, original: [cleaver] });
         root.userData.animations = K.RACE_ANIMATIONS;
         root.userData.animate = K.createHumanoidAnimator(parts, {
           race: 'orc',
@@ -690,34 +690,180 @@
   const catalog = window.GGG_MODEL_CATALOG;
   const fighters = {};
 
-  function equipClass(THREE, root, race, cls) {
-    const { right, left, original } = loadouts.get(root);
-    original.forEach(item => { item.visible = false; });
-    const metal = K.mat(THREE, { color: raceColors[race], metalness: 0.55, roughness: 0.36 });
-    const dark = K.mat(THREE, { color: 0x263449, metalness: 0.35, roughness: 0.55 });
-    const glow = K.mat(THREE, { color: classColors[cls], emissive: classColors[cls], emissiveIntensity: 0.55 });
+  // Class silhouette overlays + race-aware weapons so same-race heroes read apart in-arena.
+  function dressClassSilhouette(THREE, nodes, cls, mats) {
+    const { chest, head, pelvis } = nodes;
+    if (!chest || !head) return;
+    const { metal, dark, glow, soft } = mats;
+
+    if (cls === 'warrior') {
+      // Combat harness + spiky pauldrons + brow crest
+      K.add(THREE, chest, new THREE.BoxGeometry(0.42, 0.08, 0.34), dark, [0, 0.16, 0.02]);
+      K.add(THREE, chest, new THREE.BoxGeometry(0.16, 0.22, 0.08), glow, [0, 0.02, 0.2]);
+      [-1, 1].forEach(s => {
+        K.add(THREE, chest, new THREE.BoxGeometry(0.18, 0.14, 0.22), metal, [s * 0.28, 0.14, 0], [0, 0, -s * 0.35]);
+        K.add(THREE, chest, new THREE.ConeGeometry(0.04, 0.12, 5), glow, [s * 0.32, 0.22, 0.04], [0.4, 0, 0]);
+      });
+      K.add(THREE, head, new THREE.BoxGeometry(0.18, 0.06, 0.2), metal, [0, 0.2, 0.04]);
+      K.add(THREE, head, new THREE.ConeGeometry(0.05, 0.12, 4), glow, [0, 0.28, 0.02]);
+    } else if (cls === 'tank') {
+      // Bulky breastplate, oversized pauldrons, visored helm
+      K.add(THREE, chest, new THREE.BoxGeometry(0.56, 0.38, 0.36), metal, [0, 0.02, 0.04]);
+      K.add(THREE, chest, new THREE.BoxGeometry(0.22, 0.18, 0.1), glow, [0, 0.04, 0.22]);
+      [-1, 1].forEach(s => {
+        K.add(THREE, chest, new THREE.BoxGeometry(0.26, 0.22, 0.28), metal, [s * 0.34, 0.12, 0], [0, 0, -s * 0.2]);
+        K.add(THREE, chest, new THREE.BoxGeometry(0.08, 0.16, 0.2), dark, [s * 0.42, 0.12, 0.04]);
+      });
+      if (pelvis) {
+        K.add(THREE, pelvis, new THREE.BoxGeometry(0.4, 0.14, 0.3), metal, [0, 0.02, 0.02]);
+      }
+      K.add(THREE, head, new THREE.BoxGeometry(0.36, 0.22, 0.34), metal, [0, 0.08, 0]);
+      K.add(THREE, head, new THREE.BoxGeometry(0.28, 0.1, 0.12), glow, [0, 0.06, 0.16]);
+      K.add(THREE, head, new THREE.BoxGeometry(0.12, 0.16, 0.1), dark, [0, -0.08, 0.16]);
+    } else if (cls === 'support') {
+      // Soft hood/cap, sash, utility pouches, cross emblem
+      K.add(THREE, chest, new THREE.BoxGeometry(0.12, 0.28, 0.08), glow, [0, 0.02, 0.2]);
+      K.add(THREE, chest, new THREE.BoxGeometry(0.28, 0.08, 0.08), glow, [0, 0.02, 0.2]);
+      K.add(THREE, chest, new THREE.BoxGeometry(0.46, 0.1, 0.32), soft, [0, -0.08, 0.02], [0.15, 0, 0]);
+      if (pelvis) {
+        [[-0.16, 0.02, 0.14], [0.16, 0.02, 0.14]].forEach(p => {
+          K.add(THREE, pelvis, new THREE.BoxGeometry(0.1, 0.12, 0.1), dark, p);
+        });
+      }
+      K.add(THREE, head, new THREE.SphereGeometry(0.2, 12, 10, 0, Math.PI * 2, 0, Math.PI * 0.55), soft, [0, 0.1, -0.02]);
+      K.add(THREE, head, new THREE.BoxGeometry(0.22, 0.05, 0.24), glow, [0, 0.02, 0.1]);
+    } else {
+      // Mage: pointed hood/hat, robe panels, orbiting shoulder gems
+      K.add(THREE, chest, new THREE.BoxGeometry(0.48, 0.42, 0.2), soft, [0, -0.06, -0.12]);
+      K.add(THREE, chest, new THREE.BoxGeometry(0.14, 0.26, 0.08), glow, [0, 0.02, 0.2]);
+      [-1, 1].forEach(s => {
+        K.add(THREE, chest, new THREE.OctahedronGeometry(0.08), glow, [s * 0.28, 0.16, 0.08]);
+        K.add(THREE, chest, new THREE.BoxGeometry(0.12, 0.34, 0.16), soft, [s * 0.22, -0.1, -0.02], [0, 0, s * 0.25]);
+      });
+      if (pelvis) {
+        K.add(THREE, pelvis, new THREE.BoxGeometry(0.44, 0.2, 0.28), soft, [0, -0.06, 0.02]);
+      }
+      const hat = K.joint(THREE, head, 0, 0.16, -0.02);
+      K.add(THREE, hat, new THREE.ConeGeometry(0.18, 0.42, 8), soft, [0, 0.22, 0]);
+      K.add(THREE, hat, new THREE.TorusGeometry(0.16, 0.03, 6, 12), glow, [0, 0.02, 0], [Math.PI / 2, 0, 0]);
+      K.add(THREE, hat, new THREE.OctahedronGeometry(0.06), glow, [0, 0.44, 0]);
+    }
+  }
+
+  function equipClassWeapon(THREE, hands, race, cls, mats) {
+    const { right, left } = hands;
+    const { metal, dark, glow, soft } = mats;
     const weapon = K.joint(THREE, right, 0, 0, 0.04);
     weapon.rotation.x = 0.3;
-    K.add(THREE, weapon, new THREE.CylinderGeometry(0.032, 0.035, 0.38, 8), dark, [0, 0.08, 0]);
-    if (cls === 'warrior') {
-      const blade = K.extrude(THREE, [[-0.07, 0.24], [0.07, 0.24], [0.11, 0.74], [0, 0.91], [-0.11, 0.74]], 0.045, 0.015, metal);
-      weapon.add(blade);
-      K.add(THREE, weapon, new THREE.BoxGeometry(0.29, 0.055, 0.1), glow, [0, 0.24, 0]);
-    } else if (cls === 'tank') {
-      K.add(THREE, weapon, new THREE.BoxGeometry(0.25, 0.18, 0.21), metal, [0, 0.28, 0]);
+    const id = race + '-' + cls;
+
+    // Race × class weapon cues matching the 2dE roster titles.
+    if (id === 'human-tank' || cls === 'tank' && (race === 'orc' || race === 'elf')) {
+      // Baton / lance shaft + shield
+      K.add(THREE, weapon, new THREE.CylinderGeometry(0.03, 0.035, 0.55, 8), dark, [0, 0.18, 0]);
+      K.add(THREE, weapon, new THREE.BoxGeometry(0.1, 0.1, 0.1), glow, [0, 0.48, 0]);
+      const shield = K.joint(THREE, left, 0, 0.08, 0.12);
+      const plate = K.extrude(THREE, [[0, -0.34], [-0.3, -0.08], [-0.3, 0.26], [0, 0.36], [0.3, 0.26], [0.3, -0.08]], 0.07, 0.015, metal);
+      shield.add(plate);
+      K.add(THREE, shield, new THREE.OctahedronGeometry(0.11), glow, [0, 0.04, 0.09]);
+      if (race === 'elf') {
+        K.add(THREE, weapon, new THREE.ConeGeometry(0.05, 0.18, 5), glow, [0, 0.58, 0]);
+      }
+      return;
+    }
+    if (id === 'dwarf-tank') {
+      // Keep hammer-like bulk even when not using original loadout path
+      K.add(THREE, weapon, new THREE.CylinderGeometry(0.032, 0.035, 0.42, 8), dark, [0, 0.12, 0]);
+      K.add(THREE, weapon, new THREE.BoxGeometry(0.28, 0.2, 0.22), metal, [0, 0.36, 0]);
       const shield = K.joint(THREE, left, 0, 0.1, 0.13);
       const plate = K.extrude(THREE, [[0, -0.32], [-0.29, -0.06], [-0.29, 0.24], [0, 0.34], [0.29, 0.24], [0.29, -0.06]], 0.06, 0.015, metal);
       shield.add(plate);
-      K.add(THREE, shield, new THREE.OctahedronGeometry(0.12), glow, [0, 0.04, 0.08]);
-    } else if (cls === 'support') {
-      K.add(THREE, weapon, new THREE.CylinderGeometry(0.065, 0.07, 0.34, 8), metal, [0, 0.27, 0]);
-      K.add(THREE, weapon, new THREE.BoxGeometry(0.23, 0.07, 0.10), glow, [0, 0.45, 0]);
-      K.add(THREE, weapon, new THREE.BoxGeometry(0.07, 0.22, 0.10), glow, [0, 0.45, 0]);
-      K.add(THREE, left, new THREE.IcosahedronGeometry(0.105, 1), glow, [0, -0.10, 0.13]);
+      return;
+    }
+    if (cls === 'warrior') {
+      if (race === 'elf') {
+        // Twin dagger silhouettes
+        [-0.05, 0.05].forEach((ox, i) => {
+          const d = K.extrude(THREE, [[-0.03, 0.1], [0.03, 0.1], [0.04, 0.42], [0, 0.55], [-0.04, 0.42]], 0.03, 0.01, metal);
+          d.position.set(ox, 0, i ? 0.04 : -0.04);
+          weapon.add(d);
+        });
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.18, 0.04, 0.08), glow, [0, 0.12, 0]);
+      } else if (race === 'dwarf') {
+        K.add(THREE, weapon, new THREE.CylinderGeometry(0.03, 0.035, 0.4, 8), dark, [0, 0.1, 0]);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.08, 0.22, 0.05), metal, [0.1, 0.34, 0]);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.08, 0.22, 0.05), metal, [-0.1, 0.34, 0]);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.22, 0.05, 0.08), glow, [0, 0.22, 0]);
+      } else {
+        // Cleaver / blade
+        const blade = K.extrude(THREE, [[-0.07, 0.24], [0.07, 0.24], [0.12, 0.78], [0, 0.95], [-0.12, 0.78]], 0.05, 0.015, metal);
+        weapon.add(blade);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.3, 0.055, 0.1), glow, [0, 0.24, 0]);
+      }
+      return;
+    }
+    if (cls === 'support') {
+      if (race === 'human') {
+        // Medgun
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.08, 0.1, 0.42), soft, [0, 0.08, 0.08]);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.05, 0.05, 0.16), glow, [0, 0.12, 0.28]);
+        K.add(THREE, left, new THREE.IcosahedronGeometry(0.09, 1), glow, [0, -0.08, 0.12]);
+      } else if (race === 'elf') {
+        // Flask
+        K.add(THREE, weapon, new THREE.CylinderGeometry(0.04, 0.07, 0.22, 8), soft, [0, 0.18, 0]);
+        K.add(THREE, weapon, new THREE.SphereGeometry(0.09, 10, 8), glow, [0, 0.32, 0]);
+        K.add(THREE, weapon, new THREE.CylinderGeometry(0.03, 0.03, 0.08, 6), dark, [0, 0.44, 0]);
+      } else if (race === 'dwarf') {
+        // Totem
+        K.add(THREE, weapon, new THREE.CylinderGeometry(0.04, 0.05, 0.55, 8), dark, [0, 0.2, 0]);
+        K.add(THREE, weapon, new THREE.BoxGeometry(0.16, 0.12, 0.16), metal, [0, 0.48, 0]);
+        K.add(THREE, weapon, new THREE.OctahedronGeometry(0.09), glow, [0, 0.62, 0]);
+      } else {
+        // Hawk staff
+        K.add(THREE, weapon, new THREE.CylinderGeometry(0.025, 0.035, 0.7, 8), dark, [0, 0.25, 0]);
+        K.add(THREE, weapon, new THREE.SphereGeometry(0.09, 8, 6), soft, [0, 0.62, 0]);
+        K.add(THREE, weapon, new THREE.ConeGeometry(0.06, 0.14, 5), glow, [0, 0.74, 0]);
+      }
+      return;
+    }
+    // Mage
+    if (race === 'human') {
+      // Wrench
+      K.add(THREE, weapon, new THREE.BoxGeometry(0.07, 0.07, 0.42), metal, [0, 0.1, 0.06]);
+      K.add(THREE, weapon, new THREE.TorusGeometry(0.08, 0.025, 6, 10), glow, [0, 0.12, 0.28], [0, Math.PI / 2, 0]);
+    } else if (race === 'dwarf') {
+      // Magma orb
+      K.add(THREE, weapon, new THREE.SphereGeometry(0.12, 12, 10), glow, [0, 0.22, 0.08]);
+      K.add(THREE, weapon, new THREE.OctahedronGeometry(0.07), metal, [0, 0.34, 0.08]);
+    } else if (race === 'orc') {
+      // Hex staff
+      K.add(THREE, weapon, new THREE.CylinderGeometry(0.026, 0.04, 0.85, 8), dark, [0, 0.28, 0]);
+      K.add(THREE, weapon, new THREE.TorusGeometry(0.14, 0.022, 8, 16), soft, [0, 0.74, 0]);
+      K.add(THREE, weapon, new THREE.OctahedronGeometry(0.11), glow, [0, 0.74, 0]);
     } else {
+      // Elf staff (original path usually keeps detailed staff; fallback)
       K.add(THREE, weapon, new THREE.CylinderGeometry(0.026, 0.04, 0.87, 8), metal, [0, 0.30, 0]);
       K.add(THREE, weapon, new THREE.TorusGeometry(0.16, 0.022, 8, 16), dark, [0, 0.77, 0]);
       K.add(THREE, weapon, new THREE.OctahedronGeometry(0.12), glow, [0, 0.77, 0]);
+    }
+  }
+
+  function equipClass(THREE, root, race, cls, opts) {
+    const options = opts || {};
+    const loadout = loadouts.get(root);
+    if (!loadout) return;
+    const { right, left, original, chest, head, pelvis } = loadout;
+    if (!options.keepWeapons && original) {
+      original.forEach(item => { item.visible = false; });
+    }
+    const metal = K.mat(THREE, { color: raceColors[race], metalness: 0.55, roughness: 0.36 });
+    const dark = K.mat(THREE, { color: 0x263449, metalness: 0.35, roughness: 0.55 });
+    const glow = K.mat(THREE, { color: classColors[cls], emissive: classColors[cls], emissiveIntensity: 0.55 });
+    const soft = K.mat(THREE, { color: classColors[cls], metalness: 0.15, roughness: 0.72, emissive: classColors[cls], emissiveIntensity: 0.22 });
+    const mats = { metal, dark, glow, soft };
+    dressClassSilhouette(THREE, { chest, head, pelvis }, cls, mats);
+    if (!options.keepWeapons) {
+      equipClassWeapon(THREE, { right, left }, race, cls, mats);
     }
   }
 
@@ -725,9 +871,27 @@
     const base = catalog.find(entry => entry.id === 'gg-race-' + race);
     for (const cls of classes) {
       const id = race + '-' + cls;
-      if (originalClass[race] === cls) {
+      const isOriginal = originalClass[race] === cls;
+      if (isOriginal) {
+        // Keep the detailed race weapon kit, but still stamp class silhouette cues.
+        const title = id.replace(/(^|-)([a-z])/g, (_, prefix, letter) => (prefix ? ' ' : '') + letter.toUpperCase());
+        const entry = {
+          id: 'gg-fighter-' + id,
+          fighterId: id,
+          name: title,
+          game: 'GraveGain 2D',
+          category: 'Characters',
+          tags: [race, cls, 'fighter', 'animated', 'canonical'],
+          description: title + ' with class silhouette accents on the articulated GraveGain race rig.',
+          build(THREE) {
+            const root = base.build(THREE);
+            equipClass(THREE, root, race, cls, { keepWeapons: true });
+            return root;
+          }
+        };
         base.fighterId = id;
-        fighters[id] = base;
+        fighters[id] = entry;
+        catalog.push(entry);
         continue;
       }
       const title = id.replace(/(^|-)([a-z])/g, (_, prefix, letter) => (prefix ? ' ' : '') + letter.toUpperCase());

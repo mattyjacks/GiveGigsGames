@@ -63,7 +63,7 @@
     {
       id: 'human-warrior', race: 'human', cls: 'warrior', title: 'Soldier', emoji: '👩‍🚀',
       weapon: 'carbine',
-      palette: { primary: '#2563eb', secondary: '#e2e8f0', accent: '#38bdf8', skin: '#f1c27d', glow: '#38bdf8', weapon: '#64748b' },
+      palette: { primary: '#1d4ed8', secondary: '#f8fafc', accent: '#f97316', skin: '#f1c27d', glow: '#38bdf8', weapon: '#64748b' },
       blurb: 'Balanced MoonRock EVA vanguard with crisp pulse fire and thruster kicks.',
       moves: {
         neutral: { name: 'Pulse Carbine', kind: 'proj', projType: 'pulse', dmg: 6, kb: 160, kbg: 0.7, speed: 780, cd: 0.34, desc: 'Rapid blue plasma shot.' },
@@ -75,7 +75,7 @@
     {
       id: 'human-tank', race: 'human', cls: 'tank', title: 'Warden', emoji: '🛡️',
       weapon: 'riotshield',
-      palette: { primary: '#1e40af', secondary: '#cbd5e1', accent: '#22d3ee', skin: '#e0ac69', glow: '#22d3ee', weapon: '#0ea5e9' },
+      palette: { primary: '#0f766e', secondary: '#94a3b8', accent: '#22d3ee', skin: '#e0ac69', glow: '#67e8f9', weapon: '#0ea5e9' },
       blurb: 'Armored EVA juggernaut carrying a deployable hex-shield and stun baton.',
       moves: {
         neutral: { name: 'Shock Baton',   kind: 'burst', dmg: 11, kb: 300, kbg: 1.0, range: 64, desc: 'Electrified forward riot slam.' },
@@ -87,7 +87,7 @@
     {
       id: 'human-support', race: 'human', cls: 'support', title: 'Medic', emoji: '⚕️',
       weapon: 'medgun',
-      palette: { primary: '#0284c7', secondary: '#f8fafc', accent: '#4ade80', skin: '#f5cfa0', glow: '#4ade80', weapon: '#22c55e' },
+      palette: { primary: '#ecfdf5', secondary: '#86efac', accent: '#16a34a', skin: '#f5cfa0', glow: '#4ade80', weapon: '#22c55e' },
       blurb: 'Agile colony responder who heals damage % and zaps foes with bio-darts.',
       moves: {
         neutral: { name: 'Bio-Dart',      kind: 'proj', projType: 'needle', dmg: 5, kb: 140, kbg: 0.65, speed: 840, cd: 0.28, desc: 'Fast piercing dart.' },
@@ -99,7 +99,7 @@
     {
       id: 'human-mage', race: 'human', cls: 'mage', title: 'Engineer', emoji: '🔧',
       weapon: 'wrench',
-      palette: { primary: '#0369a1', secondary: '#fde047', accent: '#38bdf8', skin: '#d99b66', glow: '#fbbf24', weapon: '#94a3b8' },
+      palette: { primary: '#854d0e', secondary: '#fde047', accent: '#facc15', skin: '#d99b66', glow: '#fbbf24', weapon: '#94a3b8' },
       blurb: 'Gadgeteer deploying magnet mines, arc bolts, and automated sentry turrets.',
       moves: {
         neutral: { name: 'Arc Bolt',      kind: 'proj', projType: 'arc', dmg: 8, kb: 210, kbg: 0.85, speed: 700, cd: 0.4, desc: 'Crackling spark projectile.' },
@@ -113,7 +113,7 @@
     {
       id: 'elf-warrior', race: 'elf', cls: 'warrior', title: 'Assassin', emoji: '🗡️',
       weapon: 'daggers',
-      palette: { primary: '#059669', secondary: '#a7f3d0', accent: '#34d399', skin: '#e2e8f0', glow: '#6ee7b7', weapon: '#5eead4' },
+      palette: { primary: '#064e3b', secondary: '#6ee7b7', accent: '#f43f5e', skin: '#e2e8f0', glow: '#34d399', weapon: '#5eead4' },
       blurb: 'Blazingly fast Northern Grove duelist with shadow blinks and sharp kunai.',
       moves: {
         neutral: { name: 'Moon Kunai',    kind: 'proj', projType: 'kunai', dmg: 5, kb: 130, kbg: 0.65, speed: 920, cd: 0.24, desc: 'Razor-fast moonstone needle.' },
@@ -125,7 +125,7 @@
     {
       id: 'elf-tank', race: 'elf', cls: 'tank', title: 'Paladin', emoji: '✨',
       weapon: 'lance',
-      palette: { primary: '#0f766e', secondary: '#fde68a', accent: '#fbbf24', skin: '#f1f5f9', glow: '#5eead4', weapon: '#fcd34d' },
+      palette: { primary: '#1e3a8a', secondary: '#fde68a', accent: '#fbbf24', skin: '#f1f5f9', glow: '#fcd34d', weapon: '#fcd34d' },
       blurb: 'Radiant spellblade knight combining gilded armor with long moonstone reach.',
       moves: {
         neutral: { name: 'Spirit Lance',  kind: 'proj', projType: 'lance', dmg: 9, kb: 230, kbg: 0.88, speed: 740, cd: 0.44, desc: 'Piercing golden light spear.' },
@@ -137,7 +137,7 @@
     {
       id: 'elf-support', race: 'elf', cls: 'support', title: 'Brewer', emoji: '🧪',
       weapon: 'flask',
-      palette: { primary: '#10b981', secondary: '#c4b5fd', accent: '#a78bfa', skin: '#e2e8f0', glow: '#a78bfa', weapon: '#c084fc' },
+      palette: { primary: '#7c3aed', secondary: '#ddd6fe', accent: '#c4b5fd', skin: '#e2e8f0', glow: '#a78bfa', weapon: '#c084fc' },
       blurb: 'Mischievous alchemist tossing volatile potions and soothing elven mead.',
       moves: {
         neutral: { name: 'Acid Flask',    kind: 'toss', projType: 'flask', dmg: 10, kb: 240, kbg: 0.9, cd: 0.45, desc: 'Shattering alchemical splash.' },
@@ -149,7 +149,7 @@
     {
       id: 'elf-mage', race: 'elf', cls: 'mage', title: 'Tinkerer', emoji: '⚙️',
       weapon: 'staff',
-      palette: { primary: '#14b8a6', secondary: '#fef08a', accent: '#2dd4bf', skin: '#f1f5f9', glow: '#67e8f9', weapon: '#38bdf8' },
+      palette: { primary: '#0e7490', secondary: '#fef08a', accent: '#22d3ee', skin: '#f1f5f9', glow: '#67e8f9', weapon: '#38bdf8' },
       blurb: 'Arcane artisan weaving orbiting Light Spirits and clockwork ley-saws.',
       moves: {
         neutral: { name: 'Light Spirit',  kind: 'proj', projType: 'homing', dmg: 7, kb: 190, kbg: 0.82, speed: 520, cd: 0.45, desc: 'Gently curving spirit orb.' },
@@ -163,7 +163,7 @@
     {
       id: 'dwarf-warrior', race: 'dwarf', cls: 'warrior', title: 'Slayer', emoji: '🪓',
       weapon: 'axes',
-      palette: { primary: '#b45309', secondary: '#fde68a', accent: '#f59e0b', skin: '#f1c27d', glow: '#fbbf24', weapon: '#cbd5e1' },
+      palette: { primary: '#9a3412', secondary: '#fde68a', accent: '#ef4444', skin: '#f1c27d', glow: '#fbbf24', weapon: '#cbd5e1' },
       blurb: 'Relentless Deep Forge axe-master with brutal spinning cleaves and hatchets.',
       moves: {
         neutral: { name: 'Forge Hatchet', kind: 'proj', projType: 'hatchet', dmg: 9, kb: 240, kbg: 0.92, speed: 620, cd: 0.42, desc: 'Spinning iron throwing axe.' },
@@ -175,7 +175,7 @@
     {
       id: 'dwarf-tank', race: 'dwarf', cls: 'tank', title: 'Brute', emoji: '🔨',
       weapon: 'hammer',
-      palette: { primary: '#78350f', secondary: '#fbbf24', accent: '#f97316', skin: '#eab38c', glow: '#f97316', weapon: '#94a3b8' },
+      palette: { primary: '#44403c', secondary: '#a8a29e', accent: '#f97316', skin: '#eab38c', glow: '#fb923c', weapon: '#94a3b8' },
       blurb: 'The heaviest powerhouse on MoonRock. Slow to launch, lethal with his great-hammer.',
       moves: {
         neutral: { name: 'Boulder Toss',  kind: 'toss', projType: 'boulder', dmg: 14, kb: 340, kbg: 1.12, cd: 0.65, desc: 'Crushing heavy stone heave.' },
@@ -187,7 +187,7 @@
     {
       id: 'dwarf-support', race: 'dwarf', cls: 'support', title: 'Shaman', emoji: '🪨',
       weapon: 'totem',
-      palette: { primary: '#92400e', secondary: '#67e8f9', accent: '#38bdf8', skin: '#eab38c', glow: '#38bdf8', weapon: '#a8a29e' },
+      palette: { primary: '#155e75', secondary: '#a5f3fc', accent: '#22d3ee', skin: '#eab38c', glow: '#67e8f9', weapon: '#a8a29e' },
       blurb: 'Runic stone-seer calling sparkite lightning and restorative hearth totems.',
       moves: {
         neutral: { name: 'Rune Spark',    kind: 'proj', projType: 'arc', dmg: 8, kb: 220, kbg: 0.86, speed: 680, cd: 0.42, desc: 'Charged sparkite rune bolt.' },
@@ -199,7 +199,7 @@
     {
       id: 'dwarf-mage', race: 'dwarf', cls: 'mage', title: 'Warlock', emoji: '🔥',
       weapon: 'orb',
-      palette: { primary: '#9a3412', secondary: '#fca5a5', accent: '#fb7185', skin: '#e0ac69', glow: '#f97316', weapon: '#ef4444' },
+      palette: { primary: '#7f1d1d', secondary: '#fecaca', accent: '#fb7185', skin: '#e0ac69', glow: '#f43f5e', weapon: '#ef4444' },
       blurb: 'Magma-forge pyromancer hurling molten sparkite orbs and cursed fire.',
       moves: {
         neutral: { name: 'Magma Orb',     kind: 'proj', projType: 'fireball', dmg: 11, kb: 280, kbg: 1.0, speed: 560, cd: 0.5, desc: 'Heavy explosive fireball.' },
@@ -213,7 +213,7 @@
     {
       id: 'orc-warrior', race: 'orc', cls: 'warrior', title: 'Berserker', emoji: '⚔️',
       weapon: 'cleaver',
-      palette: { primary: '#166534', secondary: '#ef4444', accent: '#f87171', skin: '#4ade80', glow: '#ef4444', weapon: '#94a3b8' },
+      palette: { primary: '#14532d', secondary: '#fecaca', accent: '#ef4444', skin: '#4ade80', glow: '#f87171', weapon: '#94a3b8' },
       blurb: 'Ferocious Southern Wastes brawler whose berserkonin rage boosts damage at high %.',
       moves: {
         neutral: { name: 'Cleaver Wave',  kind: 'proj', projType: 'wave', dmg: 10, kb: 260, kbg: 0.96, speed: 650, cd: 0.45, desc: 'Crescent crimson shockwave.' },
@@ -225,7 +225,7 @@
     {
       id: 'orc-tank', race: 'orc', cls: 'tank', title: 'Guardian', emoji: '🛡️',
       weapon: 'towershield',
-      palette: { primary: '#14532d', secondary: '#cbd5e1', accent: '#f59e0b', skin: '#22c55e', glow: '#f59e0b', weapon: '#64748b' },
+      palette: { primary: '#1c1917', secondary: '#d6d3d1', accent: '#f59e0b', skin: '#22c55e', glow: '#fbbf24', weapon: '#64748b' },
       blurb: 'Towering iron-plated warlord who absorbs punishment and launches foes offstage.',
       moves: {
         neutral: { name: 'Iron Spike',    kind: 'proj', projType: 'hatchet', dmg: 10, kb: 270, kbg: 0.98, speed: 600, cd: 0.48, desc: 'Heavy hurled scrap spike.' },
@@ -237,7 +237,7 @@
     {
       id: 'orc-support', race: 'orc', cls: 'support', title: 'Druid', emoji: '🌿',
       weapon: 'hawkstaff',
-      palette: { primary: '#15803d', secondary: '#a7f3d0', accent: '#84cc16', skin: '#4ade80', glow: '#a3e635', weapon: '#78350f' },
+      palette: { primary: '#3f6212', secondary: '#d9f99d', accent: '#84cc16', skin: '#4ade80', glow: '#a3e635', weapon: '#78350f' },
       blurb: 'Spirit-caller channeling Earth DNA hawks, vampire bats, and healing spores.',
       moves: {
         neutral: { name: 'Spirit Hawk',   kind: 'proj', projType: 'hawk', dmg: 8, kb: 210, kbg: 0.85, speed: 780, cd: 0.38, desc: 'Fast diving spirit hawk.' },
@@ -249,7 +249,7 @@
     {
       id: 'orc-mage', race: 'orc', cls: 'mage', title: 'Witch', emoji: '🔮',
       weapon: 'hexstaff',
-      palette: { primary: '#065f46', secondary: '#d8b4fe', accent: '#c084fc', skin: '#4ade80', glow: '#c084fc', weapon: '#a855f7' },
+      palette: { primary: '#581c87', secondary: '#e9d5ff', accent: '#c084fc', skin: '#4ade80', glow: '#e879f9', weapon: '#a855f7' },
       blurb: 'Ley-hex mystic bending gravity fields and launching eerie phantom skulls.',
       moves: {
         neutral: { name: 'Hex Skull',     kind: 'proj', projType: 'homing', dmg: 9, kb: 240, kbg: 0.92, speed: 560, cd: 0.45, desc: 'Tracking violet spirit skull.' },

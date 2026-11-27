@@ -120,12 +120,31 @@
 
     switch (weapon) {
       case 'carbine':
-      case 'medgun':
         ctx.fillRect(-2, -4, 22, 7);
         ctx.fillStyle = pal.glow;
         ctx.fillRect(14, -3, 7, 3);
+        ctx.fillStyle = pal.accent;
+        ctx.fillRect(2, -7, 4, 3);
+        break;
+      case 'medgun':
+        ctx.fillStyle = pal.secondary;
+        ctx.fillRect(-2, -5, 18, 8);
+        ctx.fillStyle = pal.glow;
+        ctx.fillRect(12, -3, 8, 4);
+        ctx.fillRect(0, -8, 5, 3);
         break;
       case 'riotshield':
+        ctx.fillStyle = pal.secondary;
+        ctx.fillRect(4, -14, 9, 28);
+        ctx.strokeRect(4, -14, 9, 28);
+        ctx.fillStyle = pal.glow;
+        ctx.beginPath();
+        ctx.moveTo(8, -6);
+        ctx.lineTo(13, 0);
+        ctx.lineTo(8, 6);
+        ctx.closePath();
+        ctx.fill();
+        break;
       case 'towershield':
         ctx.fillStyle = pal.primary;
         ctx.fillRect(6, -16, 10, 32);
@@ -321,10 +340,115 @@
     ctx.restore();
   }
 
+  function drawClassGear(ctx, cls, pal) {
+    // Silhouette overlays so Warrior / Tank / Support / Mage read apart at a glance.
+    if (cls === 'warrior') {
+      ctx.fillStyle = pal.secondary;
+      ctx.fillRect(-12, -38, 24, 6);
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-3, -34, 6, 14);
+      [-1, 1].forEach(s => {
+        ctx.fillStyle = pal.secondary;
+        ctx.beginPath();
+        ctx.moveTo(s * 10, -36);
+        ctx.lineTo(s * 18, -42);
+        ctx.lineTo(s * 14, -28);
+        ctx.closePath();
+        ctx.fill();
+      });
+    } else if (cls === 'tank') {
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.roundRect(-13, -38, 26, 26, 4);
+      ctx.fill();
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-5, -32, 10, 10);
+      [-1, 1].forEach(s => {
+        ctx.fillStyle = pal.secondary;
+        ctx.fillRect(s * 12 - (s < 0 ? 8 : 0), -40, 8, 14);
+      });
+      ctx.fillStyle = pal.primary;
+      ctx.fillRect(-11, -16, 22, 6);
+    } else if (cls === 'support') {
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-2, -34, 4, 14);
+      ctx.fillRect(-7, -29, 14, 4);
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.moveTo(-11, -18);
+      ctx.lineTo(11, -18);
+      ctx.lineTo(14, -10);
+      ctx.lineTo(-14, -10);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = pal.accent;
+      ctx.fillRect(-12, -22, 6, 5);
+      ctx.fillRect(6, -22, 6, 5);
+    } else if (cls === 'mage') {
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.moveTo(-12, -20);
+      ctx.lineTo(12, -20);
+      ctx.lineTo(16, -8);
+      ctx.lineTo(-16, -8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = pal.glow;
+      ctx.beginPath();
+      ctx.arc(-11, -34, 4, 0, Math.PI * 2);
+      ctx.arc(11, -34, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = pal.accent;
+      ctx.fillRect(-3, -36, 6, 16);
+    }
+  }
+
+  function drawClassHeadwear(ctx, cls, pal, race) {
+    if (cls === 'tank') {
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.arc(0, -2, 12, Math.PI, 0);
+      ctx.fill();
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-6, -4, 12, 5);
+      if (race !== 'dwarf') {
+        ctx.fillStyle = pal.primary;
+        ctx.fillRect(-4, 4, 8, 5);
+      }
+    } else if (cls === 'mage') {
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.moveTo(-10, -4);
+      ctx.lineTo(0, -22);
+      ctx.lineTo(10, -4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = pal.glow;
+      ctx.beginPath();
+      ctx.arc(0, -22, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (cls === 'support') {
+      ctx.fillStyle = pal.secondary;
+      ctx.beginPath();
+      ctx.ellipse(0, -6, 11, 6, 0, Math.PI, 0);
+      ctx.fill();
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-5, -2, 10, 3);
+    } else if (cls === 'warrior') {
+      ctx.fillStyle = pal.accent;
+      ctx.beginPath();
+      ctx.moveTo(-4, -10);
+      ctx.lineTo(0, -18);
+      ctx.lineTo(4, -10);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
   function drawCanvasFighter(ctx, f, time) {
     // Squash & stretch during jump/land/crouch
     ctx.save();
-    const { palette: pal, race } = f.def;
+    const { palette: pal, race, cls } = f.def;
     const def = f.def;
     const crouchY = f.crouching ? 0.76 : 1;
     ctx.scale(1 / Math.sqrt(crouchY), crouchY);
@@ -334,7 +458,7 @@
 
     // Back leg
     ctx.strokeStyle = pal.secondary;
-    ctx.lineWidth = 5;
+    ctx.lineWidth = cls === 'tank' ? 7 : cls === 'mage' ? 4 : 5;
     ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(-4, -14);
@@ -348,12 +472,13 @@
     ctx.lineTo(5 + runCycle * 8, -2);
     ctx.stroke();
 
-    // Jetpack for Human
+    // Jetpack for Human (warriors/tanks keep thrusters; support/mage get a smaller pack)
     if (race === 'human') {
       ctx.fillStyle = '#475569';
-      ctx.fillRect(-13, -34, 7, 17);
+      const packH = cls === 'mage' || cls === 'support' ? 12 : 17;
+      ctx.fillRect(-13, -34, 7, packH);
       if (!f.onGround && f.vy < 0) {
-        ctx.fillStyle = '#38bdf8';
+        ctx.fillStyle = pal.glow;
         ctx.beginPath();
         ctx.moveTo(-13, -17);
         ctx.lineTo(-9, -6 - Math.random() * 6);
@@ -362,18 +487,22 @@
       }
     }
 
-    // Torso
+    // Torso — tank bulkier, mage/support narrower
+    const torsoW = cls === 'tank' ? 24 : cls === 'mage' || cls === 'support' ? 17 : 20;
+    const torsoX = -torsoW / 2;
     ctx.fillStyle = pal.primary;
     ctx.beginPath();
-    ctx.roundRect(-10, -36, 20, 23, 5);
+    ctx.roundRect(torsoX, -36, torsoW, 23, 5);
     ctx.fill();
 
     // Accent chest crest / armor
     ctx.fillStyle = pal.accent;
     ctx.fillRect(-6, -32, 12, 5);
 
-    // Elf filigree tasset
-    if (race === 'elf') {
+    drawClassGear(ctx, cls, pal);
+
+    // Elf filigree tasset (skip for tank plate skirt already drawn)
+    if (race === 'elf' && cls !== 'tank') {
       ctx.fillStyle = pal.secondary;
       ctx.beginPath();
       ctx.moveTo(-10, -16);
@@ -423,7 +552,7 @@
       ctx.beginPath();
       ctx.arc(0, 0, 10, 0, Math.PI * 2);
       ctx.fill();
-      // Iron helm + horns
+      // Iron helm + horns (base); class headwear may layer on top
       ctx.fillStyle = '#64748b';
       ctx.beginPath();
       ctx.arc(0, -2, 10.5, Math.PI, 0);
@@ -463,6 +592,7 @@
       ctx.fillStyle = '#dc2626';
       ctx.fillRect(-3, -12, 6, 4);
     }
+    drawClassHeadwear(ctx, cls, pal, race);
     ctx.restore();
 
     // Arm & Weapon
@@ -470,6 +600,22 @@
     ctx.translate(4, -29);
     drawWeapon(ctx, def.weapon, pal, attackPhase);
     ctx.restore();
+
+    // Off-hand cue: tank shield plate
+    if (cls === 'tank') {
+      ctx.save();
+      ctx.translate(-10, -28);
+      ctx.fillStyle = pal.secondary;
+      ctx.strokeStyle = pal.glow;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(-6, -12, 10, 26, 3);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = pal.glow;
+      ctx.fillRect(-3, -4, 4, 10);
+      ctx.restore();
+    }
 
     ctx.restore();
   }
