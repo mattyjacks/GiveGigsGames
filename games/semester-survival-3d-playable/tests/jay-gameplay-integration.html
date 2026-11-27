@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Jay gameplay integration smoke test</title>
+  <script type="importmap">
+    {"imports":{"three":"/games/semester-survival-runner-3d/.ci-test/node_modules/three/build/three.module.js","three/addons/":"/games/semester-survival-runner-3d/.ci-test/node_modules/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+<script type="module">
+import * as THREE from "three";
+import { loadJayCharacter } from "/games/semester-survival-runner-3d/src/three/jay-character.js";
+const result = { done:false, ok:false, checks:{} };
+window.__jayGameplayTest = result;
+try {
+  const scene = new THREE.Scene();
+  const rig = await loadJayCharacter({
+    url:"/games/semester-survival-runner-3d/assets/3d/jay/jay-unified.glb",
+    scene,targetHeight:1.78,strictClips:false
+  });
+  result.checks.availableClips = rig.availableClips;
+  result.checks.meshCount = 0;
+  result.checks.skinnedMeshCount = 0;
+  rig.root.traverse(node => {
+    if (node.isMesh) result.checks.meshCount++;
+    if (node.isSkinnedMesh) result.checks.skinnedMeshCount++;
+  });
+  if (!rig.availableClips.includes("run") || !rig.availableClips.includes("idle") ||
+      !rig.availableClips.includes("jump") || !rig.availableClips.includes("slide") ||
+      !rig.availableClips.includes("fall") || !rig.availableClips.includes("getUp")) {
+    throw new Error("Gameplay clip mapping is incomplete: " + rig.availableClips.join(", "));
+  }
+  if (!rig.runApproachCompleted) throw new Error("Authored Run_InPlace was not selected as the endless run.");
+  const position = new THREE.Vector3(1.2, 0.35, 2);
+  rig.root.position.copy(position);
+  const run = rig.play("run",{fadeSeconds:0,timeScale:1});
+  if (!run.ok) throw new Error("Could not start gameplay run clip.");
+  const runClip = rig.mixer._actions.find(action => action.getClip().name === "Run_InPlace");
+  if (!runClip) throw new Error("Run_InPlace action was not created.");
+  const duration = runClip.getClip().duration;
+  for (let i=0;i<Math.ceil(duration*101/.05);i++) rig.update(.05);
+  result.checks.runDurationSeconds = duration;
+  result.checks.runCyclesSimulated = 101;
+  result.checks.runActionStillRunning = runClip.isRunning();
+  result.checks.runApproachCompleted = rig.runApproachCompleted;
+  result.checks.gameplayRootPositionPreserved = rig.root.position.distanceTo(position) < 1e-6;
+  if (!runClip.isRunning()) throw new Error("Run_InPlace stopped during gameplay simulation.");
+  if (!result.checks.gameplayRootPositionPreserved) throw new Error("Animation changed gameplay-owned character position.");
+
+  for (const state of ["jump","slide","fall","getUp","idle","run"]) {
+    const played = rig.play(state,{fadeSeconds:0});
+    if (!played.ok) throw new Error("Gameplay transition failed for state " + state);
+    for(let i=0;i<8;i++) rig.update(.016);
+  }
+  result.checks.transitionStates = ["jump","slide","fall","getUp","idle","run"];
+  result.checks.finalActiveState = rig.activeState;
+  if (rig.activeState !== "run" || !rig.runApproachCompleted) throw new Error("Run did not resume as a continuous loop after transitions.");
+  result.ok = true;
+  rig.dispose();
+} catch(error) {
+  result.error = String(error?.stack || error);
+} finally {
+  result.done = true;
+}
+</script>
+</body>
+</html>

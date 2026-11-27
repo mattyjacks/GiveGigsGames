@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Jay — Character & Animation Lab</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}*{box-sizing:border-box}
+body{margin:0;background:#080d18;color:#eef4ff;min-height:100vh}main{max-width:1100px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}h1{font-size:clamp(22px,4vw,34px);margin:0;letter-spacing:-.04em}.sub{color:#93a6c4;font-size:13px;margin-top:5px}.tag{font-size:11px;border:1px solid #705a30;color:#f6cf7b;background:#211b10;padding:7px 10px;border-radius:999px;white-space:nowrap}
+.viewer{height:min(68vh,650px);min-height:420px;position:relative;overflow:hidden;border:1px solid #1c2a43;border-radius:20px;background:radial-gradient(ellipse at 50% 35%,#203451 0%,#101b2c 48%,#080d18 100%)}
+canvas{display:block;width:100%;height:100%}.hint{position:absolute;left:16px;top:14px;color:#a9bddb;font-size:12px;pointer-events:none;z-index:2}
+.load{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:24px;z-index:1;pointer-events:none}.load strong{font-size:16px}.load span{color:#a9bddb;font-size:12px;margin-top:8px}.bar{width:min(260px,65vw);height:5px;background:#253750;border-radius:9px;margin:14px auto 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#8dc8ff;transition:width .2s}
+.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}.panel{background:#101a2a;border:1px solid #1e2c43;border-radius:14px;padding:13px}
+label{display:block;font-size:11px;color:#91a6c6;margin-bottom:8px}select,button,input{font:inherit}select{width:100%;background:#0b1321;color:#eef4ff;border:1px solid #2b3b56;border-radius:9px;padding:10px}button{background:#c7e4ff;color:#0a1627;border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}button.secondary{background:#1d2b41;color:#e8f1ff;border:1px solid #314562}button:disabled,select:disabled,input:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:8px;flex-wrap:wrap}input[type=range]{width:100%;accent-color:#8dc8ff}
+.status{font-size:12px;color:#93a6c4;margin-top:12px;line-height:1.5;overflow-wrap:anywhere}.status.error{color:#ff9d9d}
+@media(max-width:700px){main{padding:14px}.viewer{min-height:360px;height:55vh}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}header{align-items:flex-start;flex-direction:column}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+</head>
+<body><main>
+<header><div><h1>JAY / ANIMATION LAB</h1><div class="sub">Unified character preview · separate experimental build</div></div><div class="tag">RUN LOOP UNDER VALIDATION</div></header>
+<section class="viewer" id="viewer"><div class="hint">Drag to orbit · pinch or scroll to zoom</div><div class="load" id="loading"><strong id="loadTitle">Loading Jay's character…</strong><span id="loadDetail">Preparing the 3D viewer</span><div class="bar"><i id="progress"></i></div></div></section>
+<section class="controls">
+<div class="panel"><label for="clip">ANIMATION CLIP</label><select id="clip" disabled><option>Loading clips…</option></select></div>
+<div class="panel"><label for="speed">PLAYBACK SPEED · <span id="speedText">1.00×</span></label><input id="speed" type="range" min=".25" max="1.5" step=".05" value="1" disabled></div>
+<div class="panel"><label>PLAYBACK</label><div class="actions"><button id="play" disabled>Pause</button><button id="restart" class="secondary" disabled>Restart</button></div></div>
+<div class="panel"><label>CAMERA</label><div class="actions"><button id="front" class="secondary" disabled>Front</button><button id="side" class="secondary" disabled>Side</button><button id="reset" class="secondary" disabled>Reset</button></div></div>
+</section><div class="status" id="status" role="status" aria-live="polite">Loading Jay's unified character asset…</div></main>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+const host=document.getElementById("viewer"),status=document.getElementById("status"),loading=document.getElementById("loading");
+const title=document.getElementById("loadTitle"),detail=document.getElementById("loadDetail"),progress=document.getElementById("progress");
+const clipSelect=document.getElementById("clip"),speedInput=document.getElementById("speed");
+const buttons=["play","restart","front","side","reset"].map(id=>document.getElementById(id));
+let mixer=null,active=null,clips=[],model=null,modelHeight=2.0,maxDim=2.0,ready=false;
+const clock=new THREE.Clock();
+function setStatus(message,error=false){status.textContent=message;status.classList.toggle("error",error)}
+function setControlsEnabled(enabled){clipSelect.disabled=!enabled;speedInput.disabled=!enabled;buttons.forEach(b=>b.disabled=!enabled)}
+function fail(message){title.textContent="Jay could not be displayed";detail.textContent=message;progress.style.width="0%";loading.style.display="grid";setStatus(message+" Check that the GLB asset URL is reachable and the browser allows WebGL.",true);console.error(message)}
+try{
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(34,1,.1,100);
+camera.position.set(0,1.5,5);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.6));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;host.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.target.set(0,1,0);controls.minDistance=1;controls.maxDistance=12;
+scene.add(new THREE.HemisphereLight(0xc9e3ff,0x172238,2));
+const key=new THREE.DirectionalLight(0xffffff,3);key.position.set(3,6,4);scene.add(key);
+const rim=new THREE.DirectionalLight(0x5caaff,2.2);rim.position.set(-4,3,-3);scene.add(rim);
+const floor=new THREE.Mesh(new THREE.CircleGeometry(2.2,64),new THREE.MeshStandardMaterial({color:0x13253a,roughness:.9,metalness:.15}));floor.rotation.x=-Math.PI/2;floor.position.y=-.02;scene.add(floor);
+const grid=new THREE.GridHelper(8,32,0x33506f,0x1a2b40);grid.position.y=-.01;scene.add(grid);
+function resize(){const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}
+const ro=new ResizeObserver(resize);ro.observe(host);window.addEventListener("orientationchange",resize);resize();
+function frameCamera(mode="reset"){
+if(mode==="front")camera.position.set(0,modelHeight*.62,maxDim*2.8);
+else if(mode==="side")camera.position.set(maxDim*2.8,modelHeight*.62,0);
+else camera.position.set(0,modelHeight*.68,maxDim*2.8);
+controls.target.set(0,modelHeight*.48,0);controls.update()
+}
+function playClip(name){
+if(!mixer)return;const clip=clips.find(c=>c.name===name);if(!clip)return;
+if(active){active.fadeOut(.1);mixer.stopAllAction()}
+active=mixer.clipAction(clip);active.reset().setLoop(THREE.LoopRepeat,Infinity);active.clampWhenFinished=false;active.fadeIn(.1).play();active.timeScale=Number(speedInput.value);
+document.getElementById("play").textContent="Pause";
+setStatus(name==="Run_InPlace"?"Playing Run_InPlace. Note: this experimental export still has a known loop seam; the loop is not yet approved.":"Playing "+name+" · "+clip.duration.toFixed(2)+" seconds");
+}
+const loader=new GLTFLoader();
+const assetUrl=new URL("./assets/3d/jay/jay-unified.glb",document.baseURI).href;
+const timeout=setTimeout(()=>{if(!ready)fail("The character asset is taking too long to load. Check network access and retry." )},30000);
+loader.load(assetUrl,gltf=>{
+clearTimeout(timeout);
+try{
+model=gltf.scene;scene.add(model);clips=gltf.animations||[];
+if(!clips.length)throw new Error("The GLB loaded but contains no animation clips.");
+const box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3());
+if(!Number.isFinite(size.y)||size.y<=0)throw new Error("The loaded character has invalid dimensions.");
+model.position.x-=center.x;model.position.z-=center.z;model.position.y-=box.min.y;
+modelHeight=size.y;maxDim=Math.max(size.x,size.y,size.z);
+controls.target.set(0,modelHeight*.48,0);frameCamera();mixer=new THREE.AnimationMixer(model);
+clipSelect.innerHTML="";clips.forEach(c=>{const opt=document.createElement("option");opt.value=c.name;opt.textContent=c.name+" · "+c.duration.toFixed(2)+"s";clipSelect.appendChild(opt)});
+clipSelect.value=clips.some(c=>c.name==="Run_InPlace")?"Run_InPlace":clips[0].name;
+ready=true;setControlsEnabled(true);loading.style.display="none";playClip(clipSelect.value);
+setStatus("Jay loaded successfully · "+clips.length+" clips · "+modelHeight.toFixed(2)+" model units tall. Asset: "+assetUrl);
+}catch(e){fail("Character loaded, but setup failed: "+e.message)}
+},event=>{
+if(event.total>0){const pct=Math.round(event.loaded/event.total*100);progress.style.width=pct+"%";detail.textContent="Downloading character asset · "+pct+"%"}
+else detail.textContent="Downloading character asset…";
+},error=>{clearTimeout(timeout);fail("Could not load "+assetUrl+" · "+(error?.message||"network or asset error"))});
+clipSelect.addEventListener("change",e=>playClip(e.target.value));
+speedInput.addEventListener("input",e=>{const v=Number(e.target.value);document.getElementById("speedText").textContent=v.toFixed(2)+"×";if(active)active.timeScale=v});
+document.getElementById("play").addEventListener("click",()=>{if(!active)return;active.paused=!active.paused;document.getElementById("play").textContent=active.paused?"Play":"Pause"});
+document.getElementById("restart").addEventListener("click",()=>{if(active){active.reset();active.play();active.paused=false;document.getElementById("play").textContent="Pause"}});
+document.getElementById("front").addEventListener("click",()=>frameCamera("front"));
+document.getElementById("side").addEventListener("click",()=>frameCamera("side"));
+document.getElementById("reset").addEventListener("click",()=>frameCamera());
+function animate(){requestAnimationFrame(animate);if(mixer)mixer.update(Math.min(clock.getDelta(),.05));controls.update();renderer.render(scene,camera)}animate();
+}catch(e){fail("3D viewer initialization failed: "+e.message)}
+</script></body></html>

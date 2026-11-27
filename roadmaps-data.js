@@ -218,11 +218,11 @@ window.GIVEGIGSGAMES_ROADMAPS = {
     { title: "Support controller D-pad/trigger mapping natively", text: "Bind smooth analog horizontal movement and trigger autofire for gamepads." }
   ],
   neonracer: [
-    { title: "Turn Shield & Magnet into true timed buffs", text: "Make Shield absorb 1 traffic collision and Magnet pull nearby coins for several seconds instead of granting instant +100m / +5 coins." },
-    { title: "Add a Coin Garage & Car Skins shop", text: "Let players spend collected road coins on new neon car silhouettes, trail colors, or a starting Shield." },
-    { title: "Add lane-changing rivals & road hazards", text: "Introduce telegraphing lane-swappers, speed pads, and oil slicks past 500m to keep late runs exciting." },
-    { title: "Add Pause & Mute touch buttons", text: "Expose touch buttons for Pause and Mute alongside the steering and Gas/Brake pedals." },
-    { title: "Smooth Gyro Tilt deadzone & calibration", text: "Add a Zero/Calibrate button when enabling Tilt mode so players can hold their phone at any comfortable angle." }
+    { title: "Add curved coastal highway bends & elevation hills", text: "Introduce sweeping OutRun-style banking curves and Biscayne bridge crests to complement the straightaway causeway." },
+    { title: "Add 80s Synthwave Radio Station selector", text: "Let players switch between multiple procedural 80s synthwave tracks (Sunset Cruise, Vice Pursuit, Midnight Outrun) live during a run." },
+    { title: "Add Weather & Rain Reflections toggle", text: "Add optional Miami tropical midnight rain streaks and wet windshield droplets in Hood Cam mode." },
+    { title: "Add Time-Attack Checkpoint Gates mode", text: "Introduce classic arcade OutRun checkpoint arches where clearing gates extends a countdown clock." },
+    { title: "Add Local Ghost Replay silhouette", text: "Save your best-distance pacing curve so a translucent neon ghost car races alongside your personal record." }
   ],
   neonsnake: [
     { title: "Add a proper Victory screen for filling the 30×30 grid", text: "Celebrate a full 900-tile clear with a Victory overlay instead of routing through gameOver() in spawnFood()." },
@@ -384,5 +384,12 @@ window.GIVEGIGSGAMES_ROADMAPS = {
     { title: "Give all 10 purchasable characters unique perks", text: "Add distinct starter bonuses (e.g., +10% energy recovery, longer coffee boost, wider magnet) so unlocking characters changes strategy." },
     { title: "Add a Boss attack pattern indicator in the HUD", text: "Show clear lane telegraph icons before each Semester Boss (1,800m+) launches its 3 attacks." },
     { title: "Capture 3 featured gameplay screenshots", text: "Add portrait action, Semester Boss, and Graduation screen captures to games/images/screenshots/." }
+  ]
+  "semester-survival-3d-playable": [
+    { title: "Complete the eight-semester campaign", text: "Build the full progression from first semester through graduation, with distinct academic and campus challenges that make each semester feel meaningfully different." },
+    { title: "Add proper semester endings and a graduation finale", text: "Replace the current preview-style run progression with clear semester completion screens, milestone summaries, and a satisfying final graduation sequence." },
+    { title: "Balance difficulty across the full university journey", text: "Tune traffic, obstacles, pickups, upgrades, and challenge pacing so difficulty rises fairly from early semesters to the final campaign." },
+    { title: "Expand campus locations and semester-specific events", text: "Give the eight-semester journey stronger visual and gameplay variety through recognizable university locations, events, and changing campus conditions." },
+    { title: "Polish mobile performance, controls, and progression saves", text: "Test on mid-range Android devices, refine touch gestures and frame pacing, and make campaign progress and unlocked upgrades persist reliably." }
   ]
 };

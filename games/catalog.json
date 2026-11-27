@@ -34,7 +34,8 @@
         "games/images/screenshots/gravegain2dD-2.jpg",
         "games/images/screenshots/gravegain2dD-3.jpg"
       ],
-      "mobilePriority": 100
+      "mobilePriority": 100,
+      "packageBytes": 216018
     },
     {
       "slug": "gravegain2dE",
@@ -64,7 +65,8 @@
         "solo",
         "multiplayer"
       ],
-      "runtimeType": "static"
+      "runtimeType": "static",
+      "packageBytes": 156700
     },
     {
       "slug": "ecosystemic-evolver",
@@ -127,7 +129,8 @@
         "games/images/screenshots/platform-wars-2.jpg",
         "games/images/screenshots/platform-wars-3.jpg"
       ],
-      "mobilePriority": 100
+      "mobilePriority": 100,
+      "packageBytes": 45605
     },
     {
       "slug": "lastwordszombies",
@@ -160,7 +163,8 @@
         "games/images/screenshots/lastwordszombies-1.jpg",
         "games/images/screenshots/lastwordszombies-2.jpg",
         "games/images/screenshots/lastwordszombies-3.jpg"
-      ]
+      ],
+      "packageBytes": 379977
     },
     {
       "slug": "venturemechanically",
@@ -193,7 +197,8 @@
         "games/images/screenshots/venturemechanically-2.jpg",
         "games/images/screenshots/venturemechanically-3.jpg"
       ],
-      "mobilePriority": 76
+      "mobilePriority": 76,
+      "packageBytes": 235146
     },
     {
       "slug": "financialfreedom",
@@ -226,7 +231,8 @@
         "games/images/screenshots/financialfreedom-2.jpg",
         "games/images/screenshots/financialfreedom-3.jpg"
       ],
-      "mobilePriority": 74
+      "mobilePriority": 74,
+      "packageBytes": 129668
     },
     {
       "slug": "serversavershield",
@@ -258,7 +264,8 @@
         "games/images/screenshots/serversavershield-2.jpg",
         "games/images/screenshots/serversavershield-3.jpg"
       ],
-      "mobilePriority": 90
+      "mobilePriority": 90,
+      "packageBytes": 425930
     },
     {
       "slug": "overtake",
@@ -291,7 +298,8 @@
         "games/images/screenshots/overtake-2.jpg",
         "games/images/screenshots/overtake-3.jpg"
       ],
-      "mobilePriority": 88
+      "mobilePriority": 88,
+      "packageBytes": 2364633
     },
     {
       "slug": "assassinanimals",
@@ -322,7 +330,8 @@
         "games/images/screenshots/assassinanimals-1.jpg",
         "games/images/screenshots/assassinanimals-2.jpg",
         "games/images/screenshots/assassinanimals-3.jpg"
-      ]
+      ],
+      "packageBytes": 334000
     },
     {
       "slug": "battlesharks",
@@ -351,7 +360,8 @@
         "solo"
       ],
       "guideEntrypoint": "battlesharks/guide.html",
-      "mobilePriority": 48
+      "mobilePriority": 48,
+      "packageBytes": 344200
     },
     {
       "slug": "battlesharks2",
@@ -383,7 +393,8 @@
         "games/images/screenshots/battlesharks2-2.jpg",
         "games/images/screenshots/battlesharks2-3.jpg"
       ],
-      "mobilePriority": 48
+      "mobilePriority": 48,
+      "packageBytes": 141355
     },
     {
       "slug": "gravegain2dA",
@@ -416,7 +427,8 @@
         "games/images/screenshots/gravegain2dA-2.jpg",
         "games/images/screenshots/gravegain2dA-3.jpg"
       ],
-      "mobilePriority": 55
+      "mobilePriority": 55,
+      "packageBytes": 1392000
     },
     {
       "slug": "gravegain2dC",
@@ -452,7 +464,8 @@
         "games/images/screenshots/gravegain2dC-2.jpg",
         "games/images/screenshots/gravegain2dC-3.jpg"
       ],
-      "mobilePriority": 55
+      "mobilePriority": 55,
+      "packageBytes": 1687190
     },
     {
       "slug": "gravegain2dB",
@@ -485,7 +498,8 @@
         "games/images/screenshots/gravegain2dB-2.jpg",
         "games/images/screenshots/gravegain2dB-3.jpg"
       ],
-      "mobilePriority": 55
+      "mobilePriority": 55,
+      "packageBytes": 531817
     },
     {
       "slug": "gravegain3dA",
@@ -517,7 +531,8 @@
         "games/images/screenshots/gravegain3dA-1.jpg",
         "games/images/screenshots/gravegain3dA-2.jpg",
         "games/images/screenshots/gravegain3dA-3.jpg"
-      ]
+      ],
+      "packageBytes": 881264
     },
     {
       "slug": "gravegain1dA",
@@ -551,7 +566,8 @@
         "games/images/screenshots/gravegain1dA-2.jpg",
         "games/images/screenshots/gravegain1dA-3.jpg"
       ],
-      "mobilePriority": 60
+      "mobilePriority": 60,
+      "packageBytes": 168054
     },
     {
       "slug": "demolichdom",
@@ -583,7 +599,8 @@
         "games/images/screenshots/demolichdom-2.jpg",
         "games/images/screenshots/demolichdom-3.jpg"
       ],
-      "mobilePriority": 45
+      "mobilePriority": 45,
+      "packageBytes": 165469
     },
     {
       "slug": "fridgesimulator",
@@ -614,7 +631,8 @@
         "games/images/screenshots/fridgesimulator-2.jpg",
         "games/images/screenshots/fridgesimulator-3.jpg"
       ],
-      "mobilePriority": 74
+      "mobilePriority": 74,
+      "packageBytes": 190889
     },
     {
       "slug": "discoveramerica",
@@ -645,7 +663,8 @@
         "games/images/screenshots/discoveramerica-2.jpg",
         "games/images/screenshots/discoveramerica-3.jpg"
       ],
-      "mobilePriority": 76
+      "mobilePriority": 76,
+      "packageBytes": 82115
     },
     {
       "slug": "orbitaldrift",
@@ -677,7 +696,8 @@
         "games/images/screenshots/orbitaldrift-2.jpg",
         "games/images/screenshots/orbitaldrift-3.jpg"
       ],
-      "mobilePriority": 86
+      "mobilePriority": 86,
+      "packageBytes": 269699
     },
     {
       "slug": "aiwhackamole",
@@ -709,7 +729,8 @@
         "games/images/screenshots/aiwhackamole-2.jpg",
         "games/images/screenshots/aiwhackamole-3.jpg"
       ],
-      "mobilePriority": 72
+      "mobilePriority": 72,
+      "packageBytes": 141232
     },
     {
       "slug": "soundpainter2",
@@ -741,7 +762,8 @@
         "games/images/screenshots/soundpainter2-2.jpg",
         "games/images/screenshots/soundpainter2-3.jpg"
       ],
-      "mobilePriority": 70
+      "mobilePriority": 70,
+      "packageBytes": 215411
     },
     {
       "slug": "soundpainter",
@@ -773,7 +795,8 @@
         "games/images/screenshots/soundpainter-2.jpg",
         "games/images/screenshots/soundpainter-3.jpg"
       ],
-      "mobilePriority": 70
+      "mobilePriority": 70,
+      "packageBytes": 85680
     },
     {
       "slug": "friendslop",
@@ -806,42 +829,8 @@
         "games/images/screenshots/friendslop-2.jpg",
         "games/images/screenshots/friendslop-3.jpg"
       ],
-      "mobilePriority": 78
-    },
-    {
-      "slug": "semester-survival",
-      "title": "Semester Survival: Jay's University Adventure",
-      "capsule": "images/capsules/semester-survival.webp",
-      "description": "Explore Residence, Township, Campus, and City as Jay across 8 semesters in a 2.5D university-life adventure. Manage energy, hunger, stress, finances, 5 courses per term, and 8 NPC schedules.",
-      "genre": "Adventure",
-      "tags": [
-        "Adventure",
-        "Life Simulation",
-        "Anime",
-        "University",
-        "2.5D",
-        "Exploration"
-      ],
-      "emoji": "🎓",
-      "featured": false,
-      "recommended": false,
-      "entrypoint": "semester-survival/index.html",
-      "runtimeType": "static",
-      "inputs": [
-        "touch",
-        "keyboard"
-      ],
-      "controls": "WASD/Arrows move (I/K depth); Space/W jump; S/Down slide; Shift sprint; E/Enter interact; Tab Student Phone; Esc pause. Touch: swipe to move/jump/slide plus on-screen action buttons.",
-      "modes": [
-        "solo"
-      ],
-      "guideEntrypoint": "semester-survival/guide.html",
-      "featuredScreenshots": [
-        "games/images/screenshots/semester-survival-1.jpg",
-        "games/images/screenshots/semester-survival-2.jpg",
-        "games/images/screenshots/semester-survival-3.jpg"
-      ],
-      "mobilePriority": 52
+      "mobilePriority": 78,
+      "packageBytes": 114499
     },
     {
       "slug": "gravegain5dA",
@@ -875,7 +864,8 @@
         "games/images/screenshots/gravegain5dA-1.jpg",
         "games/images/screenshots/gravegain5dA-2.jpg",
         "games/images/screenshots/gravegain5dA-3.jpg"
-      ]
+      ],
+      "packageBytes": 112748
     },
     {
       "slug": "gravegain4dA",
@@ -909,7 +899,8 @@
         "games/images/screenshots/gravegain4dA-1.jpg",
         "games/images/screenshots/gravegain4dA-2.jpg",
         "games/images/screenshots/gravegain4dA-3.jpg"
-      ]
+      ],
+      "packageBytes": 716762
     },
     {
       "slug": "starship-simulator",
@@ -947,7 +938,8 @@
         "games/images/screenshots/starship-simulator-2.jpg",
         "games/images/screenshots/starship-simulator-3.jpg"
       ],
-      "mobilePriority": 82
+      "mobilePriority": 82,
+      "packageBytes": 632650
     },
     {
       "slug": "neonbreaker",
@@ -978,7 +970,8 @@
         "games/images/screenshots/neonbreaker-2.jpg",
         "games/images/screenshots/neonbreaker-3.jpg"
       ],
-      "mobilePriority": 84
+      "mobilePriority": 84,
+      "packageBytes": 77970
     },
     {
       "slug": "neoninvaders",
@@ -1009,19 +1002,22 @@
         "games/images/screenshots/neoninvaders-2.jpg",
         "games/images/screenshots/neoninvaders-3.jpg"
       ],
-      "mobilePriority": 84
+      "mobilePriority": 84,
+      "packageBytes": 89478
     },
     {
       "slug": "neonracer",
       "title": "Neon Racer",
       "capsule": "images/capsules/neonracer.webp",
-      "description": "High-speed 3-lane cyberpunk highway dodger. Weave through traffic, thread near-misses for +15m bonuses, grab coins and 4 power-ups, and push your distance record.",
+      "description": "3D 1986 Miami synthwave highway racer. Carve down a palm-lined sunset causeway, chain near-miss combos, unlock 5 iconic 80s supercars in the Miami Garage, and trigger timed Shield, Magnet, Turbo, and Chill Wave power-ups.",
       "genre": "Racing",
       "tags": [
+        "3D",
+        "Synthwave",
         "Racing",
         "Arcade"
       ],
-      "emoji": "🏎️",
+      "emoji": "🌴",
       "featured": false,
       "recommended": false,
       "entrypoint": "neonracer/index.html",
@@ -1030,7 +1026,7 @@
         "touch",
         "keyboard"
       ],
-      "controls": "Left/Right or A/D switch lanes; Up/Down or W/S accelerate/brake; Space start/restart; P/Esc pause; M mute; F fullscreen. Touch: tap/drag lanes, Gas/Brake buttons, or optional Gyro Tilt.",
+      "controls": "Left/Right or A/D switch lanes; Up/Down or W/S accelerate/brake; C switch camera; Space start/restart; P/Esc pause; M mute synth audio; F fullscreen. Touch: tap/drag lanes, Gas/Brake pedals, Pause/Mute HUD buttons, or calibrated Gyro Tilt.",
       "modes": [
         "solo"
       ],
@@ -1040,7 +1036,8 @@
         "games/images/screenshots/neonracer-2.jpg",
         "games/images/screenshots/neonracer-3.jpg"
       ],
-      "mobilePriority": 84
+      "mobilePriority": 84,
+      "packageBytes": 178609
     },
     {
       "slug": "neonsnake",
@@ -1071,7 +1068,8 @@
         "games/images/screenshots/neonsnake-2.jpg",
         "games/images/screenshots/neonsnake-3.jpg"
       ],
-      "mobilePriority": 84
+      "mobilePriority": 84,
+      "packageBytes": 68507
     },
     {
       "slug": "neonvoidrunner",
@@ -1102,7 +1100,8 @@
         "games/images/screenshots/neonvoidrunner-2.jpg",
         "games/images/screenshots/neonvoidrunner-3.jpg"
       ],
-      "mobilePriority": 84
+      "mobilePriority": 84,
+      "packageBytes": 80669
     },
     {
       "slug": "temple-of-lost-revenue",
@@ -1133,7 +1132,8 @@
         "games/images/screenshots/temple-of-lost-revenue-2.jpg",
         "games/images/screenshots/temple-of-lost-revenue-3.jpg"
       ],
-      "mobilePriority": 50
+      "mobilePriority": 50,
+      "packageBytes": 71206
     },
     {
       "slug": "the-ai-expedition",
@@ -1164,7 +1164,8 @@
         "games/images/screenshots/the-ai-expedition-2.jpg",
         "games/images/screenshots/the-ai-expedition-3.jpg"
       ],
-      "mobilePriority": 68
+      "mobilePriority": 68,
+      "packageBytes": 56935
     },
     {
       "slug": "the-cave-of-bottlenecks",
@@ -1195,7 +1196,8 @@
         "games/images/screenshots/the-cave-of-bottlenecks-2.jpg",
         "games/images/screenshots/the-cave-of-bottlenecks-3.jpg"
       ],
-      "mobilePriority": 42
+      "mobilePriority": 42,
+      "packageBytes": 63244
     },
     {
       "slug": "the-lost-city-of-customers",
@@ -1226,7 +1228,8 @@
         "games/images/screenshots/the-lost-city-of-customers-2.jpg",
         "games/images/screenshots/the-lost-city-of-customers-3.jpg"
       ],
-      "mobilePriority": 68
+      "mobilePriority": 68,
+      "packageBytes": 55529
     },
     {
       "slug": "the-madi-ai-universe",
@@ -1257,7 +1260,8 @@
         "games/images/screenshots/the-madi-ai-universe-2.jpg",
         "games/images/screenshots/the-madi-ai-universe-3.jpg"
       ],
-      "mobilePriority": 68
+      "mobilePriority": 68,
+      "packageBytes": 63707
     },
     {
       "slug": "the-pipeline-mountain",
@@ -1288,7 +1292,8 @@
         "games/images/screenshots/the-pipeline-mountain-2.jpg",
         "games/images/screenshots/the-pipeline-mountain-3.jpg"
       ],
-      "mobilePriority": 42
+      "mobilePriority": 42,
+      "packageBytes": 63140
     },
     {
       "slug": "the-revenue-dragon",
@@ -1319,7 +1324,8 @@
         "games/images/screenshots/the-revenue-dragon-2.jpg",
         "games/images/screenshots/the-revenue-dragon-3.jpg"
       ],
-      "mobilePriority": 40
+      "mobilePriority": 40,
+      "packageBytes": 70594
     },
     {
       "slug": "the-revenue-jungle",
@@ -1350,7 +1356,8 @@
         "games/images/screenshots/the-revenue-jungle-2.jpg",
         "games/images/screenshots/the-revenue-jungle-3.jpg"
       ],
-      "mobilePriority": 40
+      "mobilePriority": 40,
+      "packageBytes": 77911
     },
     {
       "slug": "the-speed-portal",
@@ -1381,7 +1388,8 @@
         "games/images/screenshots/the-speed-portal-2.jpg",
         "games/images/screenshots/the-speed-portal-3.jpg"
       ],
-      "mobilePriority": 50
+      "mobilePriority": 50,
+      "packageBytes": 67393
     },
     {
       "slug": "treasure-hunters",
@@ -1412,7 +1420,8 @@
         "games/images/screenshots/treasure-hunters-2.jpg",
         "games/images/screenshots/treasure-hunters-3.jpg"
       ],
-      "mobilePriority": 40
+      "mobilePriority": 40,
+      "packageBytes": 61881
     },
     {
       "slug": "global-fashion-model-life",
@@ -1437,7 +1446,8 @@
         "solo"
       ],
       "guideEntrypoint": "global-fashion-model-life/guide.html",
-      "mobilePriority": 80
+      "mobilePriority": 80,
+      "packageBytes": 124643
     },
     {
       "slug": "gravegain1d",
@@ -1463,7 +1473,8 @@
         "multiplayer"
       ],
       "guideEntrypoint": "gravegain1d/guide.html",
-      "mobilePriority": 58
+      "mobilePriority": 58,
+      "packageBytes": 158234
     },
     {
       "slug": "gravegain1dB",
@@ -1488,7 +1499,8 @@
         "solo"
       ],
       "guideEntrypoint": "gravegain1dB/guide.html",
-      "mobilePriority": 58
+      "mobilePriority": 58,
+      "packageBytes": 182648
     },
     {
       "slug": "gravegain2d",
@@ -1512,7 +1524,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "html/gravegain2d/guide.html"
+      "guideEntrypoint": "html/gravegain2d/guide.html",
+      "packageBytes": 281090
     },
     {
       "slug": "gravegain3d",
@@ -1537,7 +1550,8 @@
         "solo",
         "multiplayer"
       ],
-      "guideEntrypoint": "html/gravegain3d/guide.html"
+      "guideEntrypoint": "html/gravegain3d/guide.html",
+      "packageBytes": 763941
     },
     {
       "slug": "gravegain3dB",
@@ -1562,7 +1576,8 @@
         "solo",
         "multiplayer"
       ],
-      "guideEntrypoint": "gravegain3dB/guide.html"
+      "guideEntrypoint": "gravegain3dB/guide.html",
+      "packageBytes": 1269725
     },
     {
       "slug": "gravegain3dC",
@@ -1593,7 +1608,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "gravegain3dC/guide.html"
+      "guideEntrypoint": "gravegain3dC/guide.html",
+      "packageBytes": 2786715
     },
     {
       "slug": "gravegain4d",
@@ -1619,7 +1635,8 @@
       "modes": [
         "solo",
         "multiplayer"
-      ]
+      ],
+      "packageBytes": 708091
     },
     {
       "slug": "gravegain5d",
@@ -1645,7 +1662,8 @@
         "solo",
         "multiplayer"
       ],
-      "guideEntrypoint": "gravegain5d/guide.html"
+      "guideEntrypoint": "gravegain5d/guide.html",
+      "packageBytes": 122882
     },
     {
       "slug": "template-demo",
@@ -1668,37 +1686,8 @@
       "modes": [
         "solo"
       ],
-      "guideEntrypoint": "html/template-demo/guide.html"
-    },
-    {
-      "slug": "semester-survival-runner",
-      "title": "Semester Survival: The University Run",
-      "capsule": "images/capsules/semester-survival-runner.webp",
-      "description": "Survive 8 Kenyan university semesters (1,000m each) plus Graduation Endless Alumni Mode in a 2.5D 3-lane runner. Dodge 8 obstacle types, battle 8 Semester Bosses, collect 7 power-ups, and track GPA.",
-      "genre": "Endless Runner",
-      "tags": [
-        "Endless Runner",
-        "2D",
-        "2.5D",
-        "University",
-        "Kenya",
-        "Mobile"
-      ],
-      "emoji": "🎓",
-      "featured": false,
-      "recommended": false,
-      "entrypoint": "semester-survival-runner/index.html",
-      "inputs": [
-        "touch",
-        "keyboard"
-      ],
-      "controls": "A/D or Left/Right switch lanes; W/Up/Space jump; S/Down slide; Esc pause. Touch: swipe left/right to switch lanes, up to jump, down to slide.",
-      "modes": [
-        "solo"
-      ],
-      "runtimeType": "static",
-      "guideEntrypoint": "semester-survival-runner/guide.html",
-      "mobilePriority": 95
+      "guideEntrypoint": "html/template-demo/guide.html",
+      "packageBytes": 24431
     },
     {
       "slug": "country-generalizer",
@@ -1728,7 +1717,109 @@
         "solo"
       ],
       "runtimeType": "static",
-      "capsule": "images/capsules/country-generalizer.webp"
+      "capsule": "images/capsules/country-generalizer.webp",
+      "packageBytes": 532984
+    },
+    {
+      "slug": "semester-survival-3d-playable",
+      "title": "Semester Survival 3D: Playable Version",
+      "description": "Play a 3D Kenyan university campus runner as Jay. Dodge campus traffic and obstacles, collect coins and power-ups, unlock upgrades, and test the playable preview. The full eight-semester campaign and proper level endings are still in development.",
+      "genre": "Endless Runner",
+      "tags": [
+        "Endless Runner",
+        "3D",
+        "Three.js",
+        "University",
+        "Kenya",
+        "Mobile",
+        "WebGL",
+        "Preview"
+      ],
+      "emoji": "🏙️",
+      "featured": false,
+      "recommended": false,
+      "status": "preview",
+      "entrypoint": "semester-survival-3d-playable/index.html",
+      "inputs": [
+        "touch",
+        "keyboard"
+      ],
+      "controls": "Keyboard: Left/Right or A/D change lanes; Up/W/Space jump; Down/S slide; Escape pause. Touch: swipe left/right to change lanes, up to jump, down to slide.",
+      "modes": [
+        "solo"
+      ],
+      "runtimeType": "static",
+      "packageBytes": 2579092,
+      "capsule": "images/capsules/1795684287902.jpg"
+    },
+    {
+      "slug": "semester-survival",
+      "title": "Semester Survival: Jay's University Adventure",
+      "capsule": "images/capsules/semester-survival.webp",
+      "description": "Explore Residence, Township, Campus, and City as Jay across 8 semesters in a 2.5D university-life adventure. Manage energy, hunger, stress, finances, 5 courses per term, and 8 NPC schedules.",
+      "genre": "Adventure",
+      "tags": [
+        "Adventure",
+        "Life Simulation",
+        "Anime",
+        "University",
+        "2.5D",
+        "Exploration"
+      ],
+      "emoji": "🎓",
+      "featured": false,
+      "recommended": false,
+      "entrypoint": "semester-survival/index.html",
+      "runtimeType": "static",
+      "inputs": [
+        "touch",
+        "keyboard"
+      ],
+      "controls": "WASD/Arrows move (I/K depth); Space/W jump; S/Down slide; Shift sprint; E/Enter interact; Tab Student Phone; Esc pause. Touch: swipe to move/jump/slide plus on-screen action buttons.",
+      "modes": [
+        "solo"
+      ],
+      "guideEntrypoint": "semester-survival/guide.html",
+      "featuredScreenshots": [
+        "games/images/screenshots/semester-survival-1.jpg",
+        "games/images/screenshots/semester-survival-2.jpg",
+        "games/images/screenshots/semester-survival-3.jpg"
+      ],
+      "mobilePriority": 52,
+      "packageBytes": 5368898,
+      "hiddenFromCatalog": true
+    },
+    {
+      "slug": "semester-survival-runner",
+      "title": "Semester Survival: The University Run",
+      "capsule": "images/capsules/semester-survival-runner.webp",
+      "description": "Survive 8 Kenyan university semesters (1,000m each) plus Graduation Endless Alumni Mode in a 2.5D 3-lane runner. Dodge 8 obstacle types, battle 8 Semester Bosses, collect 7 power-ups, and track GPA.",
+      "genre": "Endless Runner",
+      "tags": [
+        "Endless Runner",
+        "2D",
+        "2.5D",
+        "University",
+        "Kenya",
+        "Mobile"
+      ],
+      "emoji": "🎓",
+      "featured": false,
+      "recommended": false,
+      "entrypoint": "semester-survival-runner/index.html",
+      "inputs": [
+        "touch",
+        "keyboard"
+      ],
+      "controls": "A/D or Left/Right switch lanes; W/Up/Space jump; S/Down slide; Esc pause. Touch: swipe left/right to switch lanes, up to jump, down to slide.",
+      "modes": [
+        "solo"
+      ],
+      "runtimeType": "static",
+      "guideEntrypoint": "semester-survival-runner/guide.html",
+      "mobilePriority": 95,
+      "packageBytes": 6448472,
+      "hiddenFromCatalog": true
     }
   ]
 }

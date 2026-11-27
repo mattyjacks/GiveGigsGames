@@ -1,0 +1,66 @@
+{
+  "title": "Semester Survival 3D: Playable Version",
+  "slug": "semester-survival-3d-playable",
+  "description": "A playable Three.js 3D campus runner preview featuring Jay, mobile and keyboard controls, campus traffic, obstacles, pickups, upgrades, and run progression. Campaign endings and final-game polish are still in development.",
+  "genre": "Endless Runner",
+  "tags": [
+    "Endless Runner",
+    "3D",
+    "Three.js",
+    "University",
+    "Kenya",
+    "Mobile",
+    "WebGL"
+  ],
+  "maker": {
+    "name": "Joseph Ombati",
+    "bio": "Creator and Game Director of Semester Survival.",
+    "url": "https://givegigs.com/user/cmwe3dxi20000ij08jbhqk8hx",
+    "urlLabel": "GiveGigsGames Worker Profile",
+    "email": "ombatijoseph640@gmail.com"
+  },
+  "controls": {
+    "keyboard": {
+      "Arrows / WASD": "Change lanes, jump and slide",
+      "Escape": "Pause"
+    },
+    "touch": {
+      "swipe": "Left/right to change lanes, up to jump, down to slide"
+    }
+  },
+  "technical": {
+    "rendering": "Three.js WebGL renderer with original runner simulation",
+    "mobileOptimized": true,
+    "targetFPS": 60
+  },
+  "assets": {
+    "external": [],
+    "local": [
+      "index.html",
+      "src/three/runner-three-renderer.js",
+      "src/three/jay-character.js",
+      "assets/3d/jay/jay-unified.glb",
+      "assets/3d/jay/jay-portrait.webp"
+    ]
+  },
+  "meta": {
+    "version": "0.3.0",
+    "status": "preview",
+    "license": "Private - All Rights Reserved"
+  },
+  "credits": [
+    {
+      "name": "Joseph Ombati",
+      "role": "Creator & Game Director",
+      "url": "https://givegigs.com/user/cmwe3dxi20000ij08jbhqk8hx",
+      "urlLabel": "GiveGigsGames Worker Profile",
+      "email": "ombatijoseph640@gmail.com"
+    },
+    {
+      "name": "Three.js",
+      "source": "Three.js",
+      "license": "MIT",
+      "url": "https://threejs.org/"
+    }
+  ]
+}

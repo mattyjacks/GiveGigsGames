@@ -557,7 +557,20 @@
     const bySlug = new Map(games.map((game) => [game.slug, game]));
     const recent = state.recent.map((slug) => bySlug.get(slug)).filter(Boolean).slice(0, 8);
     const favorites = games.filter((game) => state.favorites.has(game.slug)).slice(0, 8);
-    const inProgress = games.filter((game) => game.status === "preview" || game.status === "experimental").slice(0, 8);
+    const eligibleInProgress = games.filter(
+      (game) => game.status === "preview" || game.status === "experimental"
+    );
+    const originalEight = eligibleInProgress
+      .filter((game) => game.slug !== "semester-survival-3d-playable")
+      .slice(0, 8);
+    const semesterSurvival = eligibleInProgress.find(
+      (game) => game.slug === "semester-survival-3d-playable"
+    );
+    const inProgress = [
+      ...originalEight.slice(0, 2),
+      ...(semesterSurvival ? [semesterSurvival] : []),
+      ...originalEight.slice(2),
+    ].slice(0, 9);
 
     const fill = (key, list, note) => {
       const hasItems = list.length > 0;
@@ -1065,7 +1078,7 @@
       }
       if (!catalog) catalog = window.GIVEGIGSGAMES_CATALOG;
       if (!catalog || !Array.isArray(catalog.games)) throw new Error("Catalog data is missing.");
-      games = catalog.games;
+      games = catalog.games.filter((game) => !game.hiddenFromCatalog);
       loaded = true;
       setupHero();
       setupTicker();

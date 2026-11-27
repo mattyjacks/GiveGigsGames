@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Jay unified run-loop validation</title>
+  <script type="importmap">
+    {"imports":{"three":"/games/semester-survival-runner-3d/.ci-test/node_modules/three/build/three.module.js"}}
+  </script>
+</head>
+<body>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "/games/semester-survival-runner-3d/.ci-test/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+
+const result = { done: false, ok: false, checks: {} };
+window.__jayRunTest = result;
+
+try {
+  const gltf = await new GLTFLoader().loadAsync(
+    "/games/semester-survival-runner-3d/assets/3d/jay/jay-unified.glb"
+  );
+  const names = gltf.animations.map(clip => clip.name).sort();
+  result.checks.clipNames = names;
+  const required = ["Fall", "Idle", "Jump", "Run", "Run_InPlace", "Slide"];
+  if (JSON.stringify(names) !== JSON.stringify(required)) {
+    throw new Error("Unified GLB clip list mismatch: " + names.join(", "));
+  }
+
+  const run = gltf.animations.find(clip => clip.name === "Run_InPlace");
+  if (!run || run.duration < 0.5 || run.duration > 0.8) {
+    throw new Error("Run_InPlace duration is unexpected: " + run?.duration);
+  }
+  result.checks.runDurationSeconds = run.duration;
+
+  let hips = null;
+  let leftFoot = null;
+  const boneObjects = new Map();
+  gltf.scene.traverse(node => {
+    if (node.isBone) boneObjects.set(node.name, node);
+    if (node.isSkinnedMesh && node.skeleton) {
+      for (const bone of node.skeleton.bones) boneObjects.set(bone.name, bone);
+    }
+  });
+  const boneNames = [...boneObjects.keys()].sort();
+  result.checks.boneCount = boneNames.length;
+  result.checks.boneNames = boneNames;
+  const normalizeBoneName = name => String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  for (const [name, bone] of boneObjects) {
+    const normalized = normalizeBoneName(name);
+    if (!hips && normalized.includes("hips")) hips = bone;
+    if (!leftFoot && normalized.includes("leftfoot")) leftFoot = bone;
+  }
+  if (!hips || !leftFoot) {
+    throw new Error("Required Hips/LeftFoot bones were not found. Imported bones: " + boneNames.join(", "));
+  }
+
+  const mixer = new THREE.AnimationMixer(gltf.scene);
+  const action = mixer.clipAction(run);
+  action.setLoop(THREE.LoopRepeat, Infinity);
+  action.clampWhenFinished = false;
+  action.play();
+
+  // Apply the animation at t=0 before capturing the baseline. Before the
+  // first mixer update, bones still hold their bind pose, which is NOT the
+  // first frame of the authored run and creates a false seam failure.
+  mixer.update(0);
+  const boneSnapshot = () => [...boneObjects.values()].map(bone => ({
+    name: bone.name,
+    position: bone.position.clone(),
+    quaternion: bone.quaternion.clone()
+  }));
+  const initialPose = boneSnapshot();
+  const initialHips = hips.position.clone();
+  const initialFoot = leftFoot.quaternion.clone();
+
+  mixer.update(run.duration * 0.5);
+  const midHips = hips.position.clone();
+  const midFoot = leftFoot.quaternion.clone();
+  const hipsMotion = midHips.distanceTo(initialHips);
+  const footMotion = 1 - Math.abs(initialFoot.dot(midFoot));
+  result.checks.hipsMidCycleMotion = hipsMotion;
+  result.checks.footMidCycleQuaternionDelta = footMotion;
+  if (hipsMotion < 0.002 && footMotion < 0.002) {
+    throw new Error("Run_InPlace appears static; no meaningful skeletal motion was detected.");
+  }
+
+  const poseError = () => {
+    const current = boneSnapshot();
+    let maxPosition = 0;
+    let maxRotation = 0;
+    for (let i = 0; i < initialPose.length; i++) {
+      maxPosition = Math.max(maxPosition, current[i].position.distanceTo(initialPose[i].position));
+      maxRotation = Math.max(maxRotation, 1 - Math.abs(current[i].quaternion.dot(initialPose[i].quaternion)));
+    }
+    return { maxPosition, maxRotation };
+  };
+
+  mixer.update(run.duration * 0.5);
+  let seam = poseError();
+  result.checks.firstLoopSeamMaxBonePositionError = seam.maxPosition;
+  result.checks.firstLoopSeamMaxBoneRotationError = seam.maxRotation;
+  if (seam.maxPosition > 0.003 || seam.maxRotation > 0.002) {
+    throw new Error("First run-loop seam mismatch: " + JSON.stringify(seam));
+  }
+
+  let maxPositionError = seam.maxPosition;
+  let maxRotationError = seam.maxRotation;
+  for (let i = 0; i < 100; i++) {
+    mixer.update(run.duration);
+    seam = poseError();
+    maxPositionError = Math.max(maxPositionError, seam.maxPosition);
+    maxRotationError = Math.max(maxRotationError, seam.maxRotation);
+    if (seam.maxPosition > 0.003 || seam.maxRotation > 0.002) {
+      throw new Error("Pose drift detected after loop " + (i + 2) + ": " + JSON.stringify(seam));
+    }
+  }
+  result.checks.loopsSimulated = 101;
+  result.checks.maxBonePositionErrorAcrossLoops = maxPositionError;
+  result.checks.maxBoneRotationErrorAcrossLoops = maxRotationError;
+  result.checks.actionStillRunning = action.isRunning();
+  if (!action.isRunning()) throw new Error("Run_InPlace stopped during repeated playback.");
+
+  result.ok = true;
+} catch (error) {
+  result.error = String(error?.stack || error);
+} finally {
+  result.done = true;
+}
+</script>
+</body>
+</html>

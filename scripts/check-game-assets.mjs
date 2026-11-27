@@ -15,7 +15,7 @@ for (const game of catalog.games.filter((item) => item.runtimeType === "static")
   const offlineMarkup = html.replace(/vercelAnalyticsScript\.src\s*=\s*["']\/_vercel\/insights\/script\.js["']/g, "");
   for (const [, , url] of offlineMarkup.matchAll(/(?:src|href|poster|data-src)\s*=\s*(["'])(.*?)\1/gi)) {
     const value = url.trim();
-    if (!value || /^(?:https?:|\/\/|data:|blob:|javascript:|#)/i.test(value)) continue;
+    if (!value || /^(?:https?:|mailto:|\/\/|data:|blob:|javascript:|#)/i.test(value)) continue;
     const localPath = decodeURIComponent(value.split(/[?#]/, 1)[0]);
     if (!localPath) continue;
     const resolved = path.resolve(baseDir, localPath);

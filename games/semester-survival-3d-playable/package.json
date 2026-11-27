@@ -1,0 +1,9 @@
+{
+  "name": "semester-survival-runner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:runner-modules": "node --test tests/runner-modules.test.mjs tests/character-animation.test.cjs tests/three-character-animation.test.mjs tests/run-motion.test.mjs tests/collision-report.test.mjs tests/quality-profile.test.mjs tests/difficulty-progression.test.mjs tests/ramp-vehicle.test.mjs tests/carry-vehicle.test.mjs tests/audio-manager.test.mjs",
+    "test:audio": "node --test --test-reporter=spec tests/audio-manager.test.mjs"
+  }
+}

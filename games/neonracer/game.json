@@ -1,10 +1,14 @@
 {
-    "title": "Neon Racer",
+    "title": "Neon Racer: Miami '86",
     "slug": "neon-racer",
-    "description": "High-speed racing through a neon-lit cyberpunk cityscape. Weave through traffic, avoid obstacles, and go as fast as you can. The longer you survive, the higher your score. Pure arcade racing thrills.",
+    "description": "3D 1986 Miami synthwave highway racer. Carve through sunset traffic in sculpted 80s supercars, chain near-miss combos, trigger true timed Shield/Magnet/Turbo/Chill Wave buffs, and unlock rides in the Miami Garage.",
     "genre": "Racing",
     "tags": [
         "HTML5",
+        "3D",
+        "Synthwave",
+        "Miami",
+        "80s",
         "Neon",
         "Racing",
         "Arcade",
@@ -38,17 +42,20 @@
     "controls": {
         "keyboard": {
             "\u2190 \u2192 / A D": "Switch lanes",
+            "\u2191 \u2193 / W S": "Gas / Brake",
+            "C": "Switch camera (Chase / Hood / Arcade)",
+            "M": "Toggle 80s synth audio",
             "Space": "Start / Restart",
             "P or Esc": "Pause"
         },
         "touch": true,
         "mouse": false
     },
-    "instructions": "Race through a neon cyberpunk highway at breakneck speeds. Swerve between lanes to avoid other cars and obstacles. The longer you survive, the faster you go and the more points you score. Use left/right arrow keys or A/D to switch lanes. Press Space to start and P to pause.",
+    "instructions": "Race down a 3D 1986 Miami synthwave causeway at sunset. Carve through coupes, vans, and telegraphing lane-swappers, chain near-miss combos, collect coins for the Miami Garage, and grab timed Shield, Magnet, Turbo, and Chill Wave power-ups.",
     "technical": {
         "canvasSize": {
-            "width": 400,
-            "height": 600
+            "width": 1280,
+            "height": 720
         },
         "targetFPS": 60,
         "mobileOptimized": true
@@ -61,10 +68,10 @@
         ]
     },
     "meta": {
-        "version": "1.0.0",
+        "version": "2.0.0",
         "created": "2026-06-18",
         "license": "MIT"
     },
-    "stage": "prototype",
+    "stage": "playable",
     "visible": true
 }

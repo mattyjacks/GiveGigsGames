@@ -218,11 +218,11 @@ window.GIVEGIGSGAMES_DETAILS = {
     platform: "HTML5 canvas shooter with 4-way lower-half movement, touch drag, and Auto-Fire toggle."
   },
   neonracer: {
-    objective: "Survive as long as possible on a 3-lane neon highway, weaving around traffic and threading near-misses for distance bonuses.",
-    modes: "Solo endless 3-lane arcade traffic dodger.",
-    systems: "Gradual speed ramp, +15m near-miss bonuses, collectible coins, and 4 road pickups (Speed, Slow, Shield +100m, Magnet +5 coins).",
-    saves: "Browser localStorage: neonRacerHighScore.",
-    platform: "400×600 portrait arcade racer with touch buttons and optional Gyro Tilt steering."
+    objective: "Race down a 3D 1986 Miami synthwave causeway at sunset, weaving around coupes, vans, and lane-swapping rivals while chaining near-miss combos.",
+    modes: "Solo endless 3D 3-lane Miami arcade racer with 4 escalating highway strips (Ocean Dr, Biscayne Bay, Vice Overdrive, Midnight 86) and 3 camera views.",
+    systems: "True timed Neon Shield (crash absorption + EMP blast), Coin Magnet, Turbo Overdrive, and Chill Wave Slow-Mo; x2–x5 near-miss combos; Speed Pads & Oil Slicks; persistent Miami Coin Garage with 5 unlockable 80s supercars and permanent upgrades.",
+    saves: "Browser localStorage: neonRacerHighScore and neonRacerGarageV1.",
+    platform: "Three.js 3D synthwave racer with procedural 80s Web Audio soundtrack, responsive full-frame stage, HUD Pause/Mute/Camera controls, and calibrated Gyro Tilt."
   },
   neonsnake: {
     objective: "Steer across a 30×30 neon grid, eating glowing food orbs to grow and score without crashing into walls or your own tail.",
